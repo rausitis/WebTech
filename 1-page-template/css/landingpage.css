@@ -1,0 +1,232 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.project-name {
+    font-size: 1.2rem;
+}
+
+.search-bar {
+    flex-grow: 1;
+    margin: 0 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.auth-section a {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 6rem 1rem 2rem;
+}
+
+.intro {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.movie-reviews {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.movie-card {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem;
+    width: calc(50% - 2rem);
+    box-sizing: border-box;
+    display: flex;
+    align-items: start;
+}
+
+.movie-poster {
+    width: 150px;
+    height: 225px;
+    background-color: #ddd;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.movie-info {
+    flex-grow: 1;
+}
+
+.movie-quote {
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.quote-author {
+    text-align: right;
+    font-weight: bold;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+@media (max-width: 768px) {
+    .project-name {
+        display: none;
+    }
+
+    .movie-card {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .movie-poster {
+        width: 100%;
+        height: 300px;
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .search-bar {
+        margin: 0 10px;
+    }
+
+    .auth-section {
+        font-size: 0.8rem;
+    }
+}
+
+/* Burger Menu Styles */
+.burger-menu {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.burger-menu div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    padding-top: 60px;
+    transition: 0.3s;
+    z-index: 999;
+}
+
+.side-menu.active {
+    left: 0;
+}
+
+.side-menu a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.side-menu a:hover {
+    background-color: #555;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .project-name {
+        display: none;
+    }
+
+    .movie-card {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .movie-poster {
+        width: 100%;
+        height: 300px;
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .search-bar {
+        margin: 0 10px;
+    }
+
+    .auth-section {
+        font-size: 0.8rem;
+    }
+
+    .burger-menu {
+        display: block;
+    }
+
+}
