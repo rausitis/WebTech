@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+body 
+{
+	margin: 0;
+	background-color: #383838;
+	font-family: Arial;
+}
+
+.page-container {
+  display: grid;
+  gap: 8px;
+  background-color: none;
+  padding: 0px;
+  grid-template-columns: 496px 496px;
+  grid-template-rows: 400px 248px 248px 100px;
+  width: 1010px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.page-item {
+  background-color: none;
+  text-align: center;
+  padding: 0px;
+  font-size: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.aboutpage-item {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+}
+
+.topcontent-item1 {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.footer-item {
+  grid-column: 1 / span 2;
+  grid-row: 4;
+}
+
+.aboutpage
+{
+	position: relative;
+	overflow: hidden;
+	font-size: 40px;
+	color: white;
+	text-align: center;
+	margin-top: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	width:100%;
+
+	/*
+	margin-top: 100px;
+	margin-left: 100px;
+	padding-bottom: 300px;
+	border: 3px solid #262626;
+	*/
+}
+
+.aboutpage .text {
+  position: relative;
+  font-size: 60px;
+  font-weight: bold;
+  top: 0%;
+  left: 0%;
+  transform: translate(0%, 50%);
+  text-shadow: 2px 2px 5px black;
+
+}
+
+
+
+.aboutpage .banner {
+	display: block;
+	top: 0px;
+	top: 50%;
+	left: 50%;
+	/**/
+}
+.banner img {
+  /*  */
+  animation-name: gallery;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 60s;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0px;
+  left:0px;
+  position: absolute;
+  display: block;
+
+}
+
+
+.banner img:nth-of-type(8) {
+  animation-delay: 42s;
+}
+.banner img:nth-of-type(7) {
+  animation-delay: 36s;
+}
+.banner img:nth-of-type(6) {
+  animation-delay: 30s;
+}
+.banner img:nth-of-type(5) {
+  animation-delay: 24s;
+}
+.banner img:nth-of-type(4) {
+  animation-delay: 18s;
+}
+.banner img:nth-of-type(3) {
+  animation-delay: 12s;
+}
+.banner img:nth-of-type(2) {
+  animation-delay: 6s;
+}
+.banner img:nth-of-type(1) {
+  animation-delay: 0s;
+}
+
+
+@keyframes gallery {
+  0% {
+    opacity:1;
+  }
+  17% {
+    opacity:1;
+  }
+  25% {
+    opacity:1;
+  }
+  92% {
+    opacity:1;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+
+</style>
+</head>
+<body>
+
+<div class="page-container">
+  <div class="page-item aboutpage-item">
+  <!--********* About Page *********-->
+	<div class="aboutpage">
+		<div class="banner">
+
+			<img src="../Source/images/About_page/Italian_Claasic.jpg">
+			<img src="../Source/images/About_page/Pans_labyrinth_2.jpg">
+			<img src="../Source/images/About_page/Schindlers-List-Typing.jpg">
+			<img src="../Source/images/About_page/Matrix3.jpg">
+			<img src="../Source/images/About_page/Schindlers_List.jpg">
+			<img src="../Source/images/About_page/Pans_labyrinth.jpg">
+			<img src="../Source/images/About_page/La-la-Land.jpg">
+			<img src="../Source/images/About_page/Avatar_2.jpg">
+			<div class="text">A welcoming comunity for all movie lovers <br><br><br><br><br></div>
+
+		</div>
+		<!--
+		-->
+	</div>
+  
+  </div>
+  <div class="page-item topcontent-item1">2</div>
+  <div class="page-item topcontent-item2">3</div>  
+  <div class="page-item topcontent-item3">4</div>
+  <div class="page-item topcontent-item4">5</div>
+  <div class="page-item footer">6</div>
+</div>
+
+</body>
+</html>
+
+
