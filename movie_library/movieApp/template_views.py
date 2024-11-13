@@ -29,3 +29,12 @@ def register(request):
 
 def sign_in(request):
     return render(request, 'SignIn.html') 
+
+def cast_and_crew(request):
+    return render(request, 'CastAndCrew.html')
+
+def movies_by_country(request):
+    return render(request, 'MoviesByCountry.html')
+
+def country_movies(request):
+    return render(request, 'Country_movies.html')
