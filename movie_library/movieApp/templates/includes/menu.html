@@ -1,0 +1,10 @@
+{% load static %}
+<!--********* Side Menu *********-->
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="{% url 'movieApp:movies' %}">Movies</a>
+    <a href="{% url 'movieApp:tv-shows' %}">TV Shows</a>
+    <a href="{% url 'movieApp:movies-by-country' %}">Movies by Country</a>
+    <a href="{% url 'movieApp:community' %}">Community</a>
+    <a href="{% url 'movieApp:about' %}">About</a>
+</div>

@@ -138,7 +138,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "movieApp/Source/",
+    BASE_DIR / "movieApp/static",
 ]
 
 # Default primary key field type

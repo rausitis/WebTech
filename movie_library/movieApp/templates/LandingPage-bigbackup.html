@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +8,101 @@
 	<meta name="keywords" content="Film, Movie, TV, TV-Show, Actor, Director, Comunity, Discussion, New in Theaters">
 	<meta name="author" content="Group 15">
 
-	<link rel="stylesheet" href="../styles/styles.css">
-	<link rel="stylesheet" href="../styles/styles_menu_bar.css">
-	<link rel="stylesheet" href="../styles/styles_footer.css">
-	<link rel="stylesheet" href="../styles/styles_registration_page.css">
+	<link rel="stylesheet" href="{% static 'CSSstyles/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'CSSstyles/styles_menu_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'CSSstyles/styles_registration_page.css' %}">
+	<style>
+		<style>
+.banner-container {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+}
+
+.banner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.banner img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.banner .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 2em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    z-index: 2;
+}
+
+.landing_page_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.topcontent {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.topcontent:hover {
+    transform: translateY(-5px);
+}
+
+.topcontent img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    padding: 20px;
+    color: white;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="banner-container">
+    <div class="banner">
+        <!-- Keep your existing banner images -->
+        <div class="text">A welcoming community for all movie lovers</div>
+    </div>
+</div>
+
+<div class="landing_page_container">
+    <!-- Your existing content items but with improved structure -->
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Simple banner rotation
+const banner = document.querySelector('.banner');
+let position = 0;
+
+setInterval(() => {
+    position = (position + 1) % banner.children.length;
+    banner.style.transform = `translateX(-${position * 100}%)`;
+}, 5000);
+</script>
 
 </head>
 
@@ -19,7 +111,7 @@
 
 <!--********* TOP BAR *********-->
 <div class="topbar">
-  <a class="active"  href="LandingPage.html"><img style="width:50px" src="../images/Logo.png"></a>	
+  <a class="active"  href="LandingPage.html"><img style="width:50px" src="{% static 'images/Logo.png' %}"></a>	
   <a onclick="openNav()">Menu</a>
   <a class="right-align" style = "font-weight: bold;" href="SignIn.html">Sign In</a>
   <a class="right-align" href="Register.html">Register</a>
@@ -30,9 +122,9 @@
 <!--********* Side Menu *********-->
 <div id="SideMenu" class="sidemenu">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="MoviesByCountry.html">Movies</a>
-  <a href="TVShowsByCountry.html">TV Shows</a>
-  <a href="CastAndCrewByCountry.html">Cast & Crew</a>
+  <a href="Movies.html">Movies</a>
+  <a href="TVShows.html">TV Shows</a>
+  <a href="CastAndCrew.html">Cast & Crew</a>
   <a href="Community.html">Community</a>
   <a href="About.html">About</a>
 </div>
@@ -53,14 +145,14 @@
 	<div class="page_item aboutpage_item">
 		<div class="aboutpage">
 			<div class="banner">
-				<img src="../images/AboutPageBanner/Italian_Claasic.jpg">
-				<img src="../images/AboutPageBanner/Pans_labyrinth_2.jpg">
-				<img src="../images/AboutPageBanner/Schindlers-List-Typing.jpg">
-				<img src="../images/AboutPageBanner/Matrix3.jpg">
-				<img src="../images/AboutPageBanner/Schindlers_List.jpg">
-				<img src="../images/AboutPageBanner/Pans_labyrinth.jpg">
-				<img src="../images/AboutPageBanner/La-la-Land.jpg">
-				<img src="../images/AboutPageBanner/Avatar_2.jpg">
+				<img src="{% static 'images/About_page/Italian_Claasic.jpg' %}">
+				<img src="{% static 'images/About_page/Pans_labyrinth_2.jpg' %}">
+				<img src="{% static 'images/About_page/Schindlers-List-Typing.jpg' %}">
+				<img src="{% static 'images/About_page/Matrix3.jpg' %}">
+				<img src="{% static 'images/About_page/Schindlers_List.jpg' %}">
+				<img src="{% static 'images/About_page/Pans_labyrinth.jpg' %}">
+				<img src="{% static 'images/About_page/La-la-Land.jpg' %}">
+				<img src="{% static 'images/About_page/Avatar_2.jpg' %}">
 				<div class="text">A welcoming community for all movie lovers</div>
 			<!--
 			-->
@@ -77,39 +169,39 @@
 	<div class="page_item topcontent_item1 topcontent">
 		<a href="MoviesByCountry.html">
 			<div>
-				<img src="../images/LandingPage/TopMovie.jpg">
+				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
 				<div class="overlay">
-					<h1>Movies</h1>
+					<h1>Movies by country</h1>
 				</div>
 			</div>			
 		</a>
 	</div>
 	<div class="page_item topcontent_item2 topcontent">
-		<a href="TVShowsByCountry.html">
+		<a href="Movies.html">
 			<div>
-				<img src="../images/LandingPage/TopTVShow.jpg">
+				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
 				<div class="overlay">
-					<h1>TV Shows</h1>
+					<h1>Movies</h1><p>Upcoming releases</p>
 				</div>
 			</div>			
 		</a>
 	</div>
 	<div class="page_item topcontent_item3 topcontent">
-		<a href="CastAndCrewByCountry.html">
+		<a href="Movies.html">
 			<div>
-				<img src="../images/LandingPage/TopCrew.jpg">
+				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
 				<div class="overlay">
-					<h1>Cast and Crew</h1><
+					<h1>Movies</h1><p>Upcoming releases</p>
 				</div>
 			</div>			
 		</a>
 	</div>
 	<div class="page_item topcontent_item4 topcontent">
-		<a href="Community.html">
+		<a href="Movies.html">
 			<div>
-				<img src="../images/LandingPage/TopContent.jpg">
+				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
 				<div class="overlay">
-					<h1>Community</h1>
+					<h1>Movies</h1><p>Upcoming releases</p>
 				</div>
 			</div>			
 		</a>
@@ -171,5 +263,6 @@
 
 <br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
 
+<script src="{% static 'js/LandingPage.js' %}"></script>
 </body>
 </html>
