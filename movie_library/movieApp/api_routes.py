@@ -1,15 +1,14 @@
-from .views import UserInfoViewset
-from .views import ContentViewset
-from .views import CastMembersViewset
-from .views import FavoriteContentViewset
-from .views import MovieMakersViewset
+from .api_views import UserInfoViewset
+from .api_views import ContentViewset
+from .api_views import CastMembersViewset
+from .api_views import FavoriteContentViewset
+from .api_views import MovieMakersViewset
 from django.views.generic import TemplateView
 
 from django.urls import path
 
 
 urlpatterns = [
-
     # REST APIs - interacting with DB
     path('userinfo/', UserInfoViewset.as_view()),
     path('userinfo/<int:id>/', UserInfoViewset.as_view()),
