@@ -1,7 +1,7 @@
 from django.urls import path
 from . import template_views
 
-template_patterns = [
+template_routes = [
     path('', template_views.landing_page, name='landing'),
     path('movies/', template_views.movies, name='movies'),
     path('movie/<int:movie_id>/', template_views.movie_detail, name='movie-detail'),
