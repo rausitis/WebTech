@@ -7,7 +7,7 @@ def movies(request):
     return render(request, 'Movies.html')
 
 def movie_detail(request, movie_id):
-    return render(request, 'Movie.html')
+    return render(request, 'Movie.html', {'movie_id': movie_id})
 
 def tv_shows(request):
     return render(request, 'TVShows.html')

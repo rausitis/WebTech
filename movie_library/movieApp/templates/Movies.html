@@ -1,110 +1,168 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="description" content="Comunity for movie lovers">
-<meta name="keywords" content="Film, Movie, TV, TV-Show, Actor, Director, Comunity, Discussion, New in Theaters">
-<meta name="author" content="Group 15">
-<meta name="csrf-token" content="{{ csrf_token }}">
-
-<link rel="stylesheet" href="{% static 'CSSstyles/styles.css' %}">
-<link rel="stylesheet" href="{% static 'CSSstyles/styles_menu_bar.css' %}">
-<link rel="stylesheet" href="{% static 'CSSstyles/styles_registration_page.css' %}">
-
-
-</head>
-<body>
-
-<!--********* TOP BAR *********-->
-<div class="topbar">
-  <a class="active"  href="LandingPage.html"><img style="width:50px" src="{% static 'images/Logo.png' %}"></a>	
-  <a onclick="openNav()">Menu</a>
-  <a class="right-align" style = "font-weight: bold;" href="SignIn.html">Sign In</a>
-  <a class="right-align" href="Register.html">Register</a>
-  <input type="text" placeholder="Search..">
+{% block content %}
+<div class="aboutpage_page_container">
+	<div class="page_item aboutpage_item">
+		<div class="aboutpage">
+			<div class="banner">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Italian_Claasic.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Pans_labyrinth_2.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Schindlers-List-Typing.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Matrix3.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Schindlers_List.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Pans_labyrinth.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/La-la-Land.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Avatar_2.jpg' %}">
+				<div class="text">A few of the films in our database</div>
+			</div>
+		</div>
+	</div>
 </div>
-
-
-<!--********* Side Menu *********-->
-
-<div id="SideMenu" class="sidemenu">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="Movies.html">Movies</a>
-  <a href="TVShows.html">TV Shows</a>
-  <a href="CastAndCrew.html">Cast & Crew</a>
-  <a href="Community.html">Community</a>
-  <a href="About.html">About</a>
+<div class="page_container">
+    <div class="movies_container" id="moviesGrid">
+        <!-- Loading state -->
+        <div class="loading">Loading movies...</div>
+    </div>
 </div>
+{% endblock %}
 
-<div id="content-list"></div>
+{% block extra_css %}
+<style>
+    .movies_container {
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
 
+    .movie_card {
+        background: var(--card-bg, #fff);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        padding: 15px;
+        transition: transform 0.2s;
+    }
+
+    .movie_card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .movie_meta {
+        color: #666;
+        margin: 10px 0;
+        font-size: 0.9em;
+    }
+
+    .mature_content {
+        background: #d32f2f;
+        color: white;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.8em;
+        margin-left: 5px;
+    }
+
+    .description {
+        font-size: 0.9em;
+        line-height: 1.4;
+        color: var(--text-color, #333);
+    }
+
+    .loading {
+        text-align: center;
+        padding: 50px;
+        grid-column: 1 / -1;
+        color: var(--text-color, #666);
+    }
+
+    .error-message {
+        text-align: center;
+        padding: 50px;
+        grid-column: 1 / -1;
+        color: #d32f2f;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
 <script>
-function openNav() {
-  document.getElementById("SideMenu").style.width = "250px";
-}
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchMovies();
+    });
 
-function closeNav() {
-  document.getElementById("SideMenu").style.width = "0";
-}
+    function fetchMovies() {
+        fetch('/api/content/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const movies = data.data.filter(item => item.type.toLowerCase() === 'movie');
+                    displayMovies(movies);
+                } else {
+                    throw new Error('Failed to fetch movies');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('moviesGrid').innerHTML = `
+                    <div class="error-message">
+                        <h2>Oops!</h2>
+                        <p>We couldn't load the movies. Please try again later.</p>
+                    </div>
+                `;
+            });
+    }
+
+    function displayMovies(movies) {
+        const container = document.getElementById('moviesGrid');
+        
+        if (movies.length === 0) {
+            container.innerHTML = `
+                <div class="error-message">
+                    <h2>No movies found</h2>
+                    <p>Check back later for our latest additions!</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = movies.map(movie => `
+            <div class="movie_card" onclick="window.location.href='/movie/${movie.id}'">
+                <h2>${escapeHtml(movie.title)}</h2>
+                <div class="movie_meta">
+                    <span>${movie.year}</span> • 
+                    <span>${escapeHtml(movie.genre)}</span>
+                    ${movie.matureContent ? '<span class="mature_content">15+</span>' : ''}
+                </div>
+                <div class="movie_meta">
+                    <span>${escapeHtml(movie.country)}</span>
+                </div>
+                <p class="description">${escapeHtml(movie.description).substring(0, 150)}...</p>
+                <div class="movie_meta">Duration: ${formatDuration(movie.duration)}</div>
+            </div>
+        `).join('');
+    }
+
+    function formatDuration(duration) {
+        try {
+            const hours = duration.match(/(\d+)H/)?.[1] || 0;
+            const minutes = duration.match(/(\d+)M/)?.[1] || 0;
+            return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+        } catch (e) {
+            return duration;
+        }
+    }
+
+    function escapeHtml(unsafe) {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
 </script>
- 
- <div class="pagecontent">
-
-
-	
- </div>
-
-
-<!--********* Footer *********-->
-<footer class="footer">
-	<div>
-		<h1><b>Social media<br></b></h1>
-		<p>
-		<a href="https://discord.com/">Discord</a><br>
-		<a href="https://www.instagram.com/">Instagram</a><br>
-		<a href="https://www.facebook.com/homeofmovies29/">Facebook</a><br>
-		<a href="https://www.reddit.com/?rdt=34230">Redit</a><br>
-		</p>
-	</div>
-	<div>
-		<h1><b>Authors<br></b></h1>
-		<p> 
-			Stanislaw Krzysztof Graczykowski<br>
-			Paul-Constantin Axinte<br>
-			Krzysztof Sekulski<br>
-			Eugénia Ficková<br>
-			Alexandre Jorge Duarte Marques Pinto<br>
-			Ruta Miglava
-		</p>
-	</div>
-	<div>
-		<h1><b>Contact Us<br></b></h1>
-		<p> 
-			email@email.com<br>
-			SDU<br>
-			Sonderborg<br>
-			Denmark
-		</p>
-	</div>
-  
-</footer>
- 
- <!--****************************************************-->
- 
- 
-
- 
-
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-
-<script src="{% static 'JSdynamics\Movies.js' %}"></script>
-</body>
-</html>
+{% endblock %}
