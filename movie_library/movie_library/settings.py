@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'phonenumber_field',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

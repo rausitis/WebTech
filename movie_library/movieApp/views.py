@@ -357,7 +357,11 @@ def RegisterUser(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("posts:list")
+            email = form.cleaned_data.get('femail')
+            password = form.cleaned_data.get('fpass')
+            user = authenticate(email=email, password=password)
+            login(request, user)
+            return redirect('landing-page')
     else:
         form = UserRegisterForm()
-    return render(request, "Register.html", {})
+    return render(request, "Register.html", {'form':form})
