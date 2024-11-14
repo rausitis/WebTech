@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="page_container movie_page_container">
+
+    <!--********* Movie Details *********-->
+    <div class="page_item movie_page_item title_item">
+        <h1>{{ movie.title }}</h1> <!-- Tytuł filmu -->
+    </div>
+
+    <div class="page_item movie_page_item poster_item">
+        <div>
+            <!---<img src="{% static 'images/Movies/Movie1/Poster/requiem-for-a-dream.jpg' %}" alt="{{ movie.title }}">
+            -->
+             <img src="{{ movie.image.url }}" alt="{{ movie.title }}" style="width:100%; height:auto;">
+            <div class="overlay"></div>
+        </div>
+    </div>
+
+    <div class="page_item movie_page_item info_item">
+        <ul>
+            <li><h2>Year:</h2> {{ movie.year }}</li>
+            <li><h2>Duration:</h2> {{ movie.duration }}</li>
+            <li><h2>Genre:</h2> {{ movie.genre }}</li>
+            <li><h2>Type:</h2> {{ movie.type }}</li>
+            <li><h2>Mature Content:</h2> {{ movie.matureContent|yesno:"Yes,No" }}</li>
+        </ul>
+        <ul>
+            <li><h2>Description:</h2> {{ movie.description }}</li>
+            <li><h2>Countries:</h2>
+                {% for country in movie.country.all %}
+                    {{ country.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </li>
+        </ul>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+     <div class="pagecontent">
+ 
+	<form id="formRegister" class="formRegister" method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+    <h1>Create an Account</h1>
+    <label for="fname" class="fieldLabel">Full Name:</label><br>
+    <input class="entryField" id="fname" name="fname" required><br>
+    <label for="femail" class="fieldLabel">Email:</label><br>
+    <input type="email" class="entryField" id="femail" name="femail" required><br>
+    <label for="fpass" class="fieldLabel">Password:</label><br>
+    <input type="password" class="entryField" id="fpass" name="fpass" required><br>
+   
+    <label for="frepass" class="fieldLabel">Re-enter password:</label><br>
+    <input type="password" class="entryField" id="frepass" name="frepass" required><br>
+    <input style="margin-left: 100px" id="BtnSubmit" type="submit" class="BtnSubmit" value="Create Account">
+    <p id="errorMessagePlaceholder" class="errorMsg">{{ error }}</p>
+</form>
+</div>
+    
+{% endblock %}

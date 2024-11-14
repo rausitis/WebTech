@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page_container mbc_page_container">
+ 
+    {% for country in countries %}
+    <div class="page_item mbc_page_item title_item">
+        <h1>{{ country.name }}</h1> 
+    </div>
+
+   
+    {% for movie in country.Movies.all %}
+    <div class="page_item mbc_page_item photo_item1 photo_item_style">
+        <a href="{% url 'movie' movie.id %}"> 
+        <h2>{{ movie.title }}</h2>
+     </a>
+    <p>{{ movie.description }}</p>
+    <p>Genre: {{ movie.genre }}</p>
+    <p>Year: {{ movie.year }}</p>
+    <p>Duration: {{ movie.duration }}</p>
+    <p>Mature Content: {{ movie.matureContent|yesno:"Yes,No" }}</p>
+    </div>
+    {% empty %}
+    <p>No movies available for {{ country.name }}</p>
+    {% endfor %}
+    {% endfor %}
+</div>
+{% endblock %}

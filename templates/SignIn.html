@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+ <div class="pagecontent">
+ 
+<form id="formRegister" class="formRegister" method="post" action="{% url 'signin' %}">
+    {% csrf_token %}
+    <h1>Sign In</h1>
+    <label for="femail" class="fieldLabel">Email:</label><br>
+    <input class="entryField" id="femail" name="femail" required><br>
+    <label for="fpass" class="fieldLabel">Password:</label><br>
+    <input type="password" class="entryField" id="fpass" name="fpass" required><br>
+   
+    <input id="BtnSubmit" type="submit" class="BtnSubmit" value="Sign In">
+    <p id="errorMessagePlaceholder" class="errorMsg">{{ error }}</p>
+</form>
+</div>
+
+  
+
+{% endblock %}

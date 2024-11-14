@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+     
+ <!--***************** Page content *****************-->
+<div class="page_container landing_page_container">
+	<!--********* Top content *********-->
+	<div class="page_item topcontent_item1 topcontent">
+		<a href="{% url 'moviesbycountry' %}">
+			<div>
+				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
+				<div class="overlay">
+					<h1>Movies by country</h1>
+				</div>
+			</div>			
+		</a>
+	</div>
+	<div class="page_item topcontent_item2 topcontent">
+		<a href="Movies.html">
+			<div>
+				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
+				<div class="overlay">
+					<h1>Movies</h1><p>Upcoming releases</p>
+				</div>
+			</div>			
+		</a>
+	</div>
+	<div class="page_item topcontent_item3 topcontent">
+		<a href="Movies.html">
+			<div>
+				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
+				<div class="overlay">
+					<h1>Movies</h1><p>Upcoming releases</p>
+				</div>
+			</div>			
+		</a>
+	</div>
+	<div class="page_item topcontent_item4 topcontent">
+		<a href="Movies.html">
+			<div>
+				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
+				<div class="overlay">
+					<h1>Movies</h1><p>Upcoming releases</p>
+				</div>
+			</div>			
+		</a>
+	</div>
+</div>
+
+{% endblock %}
