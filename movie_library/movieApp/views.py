@@ -3,6 +3,9 @@ from rest_framework.response import Response
 from . import models
 from . import serializers
 from rest_framework.views import APIView
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
+from .users import UserRegisterForm
 
 
 class UserInfoViewset(APIView):
@@ -348,3 +351,13 @@ class MovieMakersViewset(APIView):
         return Response(
             {"status": "success", "data": "Item Deleted"}
         )
+
+def RegisterUser(request):
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("posts:list")
+    else:
+        form = UserRegisterForm()
+    return render(request, "Register.html", {})

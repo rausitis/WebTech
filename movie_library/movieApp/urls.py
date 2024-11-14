@@ -6,6 +6,7 @@ from .views import MovieMakersViewset
 from django.views.generic import TemplateView
 
 from django.urls import path
+from .views import RegisterUser
 
 
 urlpatterns = [
@@ -66,8 +67,7 @@ urlpatterns = [
          TemplateView.as_view(template_name="MoviesByCountry.html"),
          name="movies-by-country-page"),
 
-    path('register/', TemplateView.as_view(template_name="Register.html"),
-         name="registration-page"),
+    path('register/', RegisterUser, name="registration-page"),
 
     path('signin/', TemplateView.as_view(template_name="SignIn.html"),
          name="sign-in-page"),
