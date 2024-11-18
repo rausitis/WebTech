@@ -52,7 +52,7 @@ def populate_movies(limit=5):
                 
             data = clean_content(row)
             
-            response = requests.post(f"http://localhost:8000/api/content/", json=data)
+            response = requests.post(f"http://localhost:7555/api/content/", json=data)
             
             if response.status_code == 201:
                 print(f"Successfully added: {data['title']}")

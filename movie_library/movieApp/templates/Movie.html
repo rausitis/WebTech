@@ -1,265 +1,138 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "base.html" %}
+{% load static %}
 
-	<meta name="description" content="Comunity for movie lovers">
-	<meta name="keywords" content="Film, Movie, TV, TV-Show, Actor, Director, Comunity, Discussion, New in Theaters">
-	<meta name="author" content="Group 15">
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'movieApp/css/styles_movie.css' %}">
+{% endblock %}
 
-	<link rel="stylesheet" href="../styles/styles.css">
-	<link rel="stylesheet" href="../styles/styles_menu_bar.css">
-	<link rel="stylesheet" href="../styles/styles_footer.css">
-	<link rel="stylesheet" href="../styles/styles_registration_page.css">
-	<link rel="stylesheet" href="../styles/styles_movie.css">
-
-	
-
-</head>
-<body>
-
-<!--********* TOP BAR *********-->
-<div class="topbar">
-  <a class="active"  href="LandingPage.html"><img style="width:50px" src="../images/Logo.png"></a>	
-  <a onclick="openNav()">Menu</a>
-  <a class="right-align" style = "font-weight: bold;" href="SignIn.html">Sign In</a>
-  <a class="right-align" href="Register.html">Register</a>
-  <input type="text" placeholder="Search..">
-</div>
-
-
-<!--********* Side Menu *********-->
-<div id="SideMenu" class="sidemenu">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="MoviesByCountry.html">Movies</a>
-  <a href="TVShowsByCountry.html">TV Shows</a>
-  <a href="CastAndCrewByCountry.html">Cast & Crew</a>
-  <a href="Community.html">Community</a>
-  <a href="About.html">About</a>
-</div>
-
-<script>
-	function openNav() {
-	  document.getElementById("SideMenu").style.width = "250px";
-	}
-
-	function closeNav() {
-	  document.getElementById("SideMenu").style.width = "0";
-	}
-</script>
-
-
-
-
-
-
-
-
- 
- <!--*****************************************************-->
-
- 
-
- <!--***************** Page content *****************-->
+{% block content %}
 <div class="page_container movie_page_container"> 
-	
-<!--********* Movies of a country *********-->
-
-<!--********* Movie 1 *********-->
-	<!--********* Title *********-->
-	<div class="page_item movie_page_item title_item">
-		<h1>Movie Name</h1>
-
-	</div>
-	<!--********* Poster *********-->
-	<div class="page_item movie_page_item poster_item">
-		<div>
-			<img src="../images/Movies/Movie33/Poster/img1.jpg">
-			<div class="overlay"></div>		
-		</div>
-	</div>
-	<!--********* Slideshow *********-->
-	<div class="page_item movie_page_item slideshow_item">
-			<div class="banner">
-				<img src="../images/Movies/Movie33/SlideShow/img1.jpg">
-				<img src="../images/Movies/Movie33/SlideShow/img2.jpg">
-				<img src="../images/Movies/Movie33/SlideShow/img3.jpg">
-			<!--
-			-->
-			</div>
-	</div>
-	<!--********* Summary *********-->
-	<div class="page_item movie_page_item info_item">
-		<ul>
-			<h1> Year:</h1>
-			<p>1990</p>
-			<h1> Duration:</h1>
-			<p>2h 00m</p>
-			<h1> Age advisory:</h1>
-			<p>10+</p>
-			<h1> Rating:</h1>
-			<p>8.5</p>
-			<h1> Genre:</h1>
-			<p>Drama</p>
-			
-		</ul>
-		<ul>
-			<h1> Director:</h1>
-			<h2>Director Name</h2>
-			</br>
-			<h1> Stars:</h1>
-			<h2> <a href="CastMember.html"> Actor Name</a>, <a href="CastMember.html"> Actor Name</a></h2>
-			</br>
-			<h1> Country:</h1>
-			<h2>Italy</h2>
-			
-		</ul>
-
-	</div>
-	
-	<!--********* Top Cast *********-->
-	<div class="page_item movie_page_item member_item1">
-		<div class=" member_container">
-			<div class=" member_photo_item">
-				<div>
-					<a href="CastMember.html"> <img src="../images/CastAndCrew/actor_110.jpg"></a>
-					<div class="overlay"></div>		
-				</div>
-			</div>
-			<div class=" member_info_item">
-				<a href="CastMember.html">
-					<h1>Diana Zande</h1>
-					<p>Lasma Spreslina</p>
-				</a>
-			</div>
-			<div class=" member_photo_item">
-				<div>
-					<a href="CastMember.html"> <img src="../images/CastAndCrew/actor_111.jpg"></a>
-					<div class="overlay"></div>		
-				</div>
-			</div>
-			<div class=" member_info_item">
-				<a href="CastMember.html">
-					<h1>Baiba Indriksone</h1>
-					<p>Olita Spreslina</p>
-				</a>
-			</div>
-			<div class=" member_photo_item">
-				<div>
-					<a href="CastMember.html"> <img src="../images/CastAndCrew/actor_000.jpg"></a>
-					<div class="overlay"></div>		
-				</div>
-			</div>
-			<div class=" member_info_item">
-				<a href="CastMember.html">
-					<h1>Gundars Abolins</h1>
-					<p>Ugis Tuters</p>
-				</a>
-			</div>
-		</div>
-	</div>
-	
-	<!--********* Top Cast *********-->
-	<div class="page_item movie_page_item member_item2">
-		<div class=" member_container">
-			<div class=" member_photo_item">
-				<div>
-					<a href="CastMember.html"> <img src="../images/CastAndCrew/actor_107.jpg"></a>
-					<div class="overlay"></div>		
-				</div>
-			</div>
-			<div class=" member_info_item">
-				<a href="CastMember.html">
-					<h1>Lilita Berzina</h1>
-					<p>Aunt Mirta</p>
-				</a>
-			</div>
-			<div class=" member_photo_item">
-				<div>
-					<a href="CastMember.html"> <img src="../images/CastAndCrew/actor_108.jpg"></a>
-					<div class="overlay"></div>		
-				</div>
-			</div>
-			<div class=" member_info_item">
-				<a href="CastMember.html">
-					<h1>Uldis Dumpis</h1>
-					<p>Eriks Tuters</p>
-				</a>
-			</div>
-			<div class=" member_photo_item">
-				<div>
-					<a href="CastMember.html"> <img src="../images/CastAndCrew/actor_109.jpg"></a>
-					<div class="overlay"></div>		
-				</div>
-			</div>
-			<div class=" member_info_item">
-				<a href="CastMember.html">
-					<h1>Olga Drege</h1>
-					<p>Dagnija Tutere</p>
-				</a>
-			</div>
-		</div>
-	</div>
-	
-	
-
-
+    <div id="movieContent">
+        <div class="loading">Loading movie details...</div>
+    </div>
 </div>
-<!--***************** Page content end *****************-->
+{% endblock %}
 
-<!--********* Footer *********-->
-<footer class="footer">
-	<div>
-		<h1><b>Social media</b></h1>
-		<p>
-		<a href="https://discord.com/">Discord</a><br>
-		<a href="https://www.instagram.com/">Instagram</a><br>
-		<a href="https://www.facebook.com/homeofmovies29/">Facebook</a><br>
-		<a href="https://www.reddit.com/?rdt=34230">Redit</a><br>
-		</p>
-	</div>
-	<div>
-		<h1><b>Authors</b></h1>
-		<p> 
-			Stanislaw Krzysztof Graczykowski<br>
-			Paul-Constantin Axinte<br>
-			Krzysztof Sekulski<br>
-			Eugénia Ficková<br>
-			Alexandre Jorge Duarte Marques Pinto<br>
-			Ruta Miglava
-		</p>
-	</div>
-	<div>
-		<h1><b>Contact Us</b></h1>
-		<p> 
-			email@email.com<br>
-			SDU<br>
-			Sonderborg<br>
-			Denmark
-		</p>
-	</div>
-</footer>
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const movieId = {{ movie_id }};
+    fetchMovieDetails(movieId);
+});
 
- 
- 
- 
- 
- 
- 
- 
- <!--****************************************************-->
- 
- 
+function fetchMovieDetails(movieId) {
+    fetch(`/api/content/${movieId}/`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Movie not found');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.status === 'success') {
+                displayMovieDetails(data.data);
+            } else {
+                throw new Error(data.message || 'Failed to load movie');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('movieContent').innerHTML = `
+                <div class="error-message">
+                    <h2>Movie not found</h2>
+                    <p>We couldn't find the movie you're looking for.</p>
+                    <a href="/movies/">Back to movies</a>
+                </div>
+            `;
+        });
+}
 
- 
+function displayMovieDetails(movie) {
+    const content = document.getElementById('movieContent');
+    
+    content.innerHTML = `
+        <!--********* Title *********-->
+        <div class="page_item movie_page_item title_item">
+            <h1>${escapeHtml(movie.title)}</h1>
+        </div>
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+        <!--********* Poster *********-->
+        <div class="page_item movie_page_item poster_item">
+            <a href="#">
+                <img src="${movie.poster || '{% static "movieApp/images/placeholder.jpg" %}'}" 
+                     alt="${escapeHtml(movie.title)}">
+                <div class="overlay"></div>
+            </a>
+        </div>
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+        <!--********* Slideshow *********-->
+        <div class="page_item movie_page_item slideshow_item">
+            <div class="banner">
+                <img src="{% static 'movieApp/images/movie_scenes/scene1.jpg' %}" alt="Scene 1">
+                <img src="{% static 'movieApp/images/movie_scenes/scene2.jpg' %}" alt="Scene 2">
+                <img src="{% static 'movieApp/images/movie_scenes/scene3.jpg' %}" alt="Scene 3">
+            </div>
+        </div>
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+        <!--********* Info *********-->
+        <div class="page_item movie_page_item info_item">
+            <ul>
+                <h1>Year:</h1>
+                <p>${movie.year}</p>
+            </ul>
+            <ul>
+                <h1>Duration:</h1>
+                <p>${formatDuration(movie.duration)}</p>
+            </ul>
+            <ul>
+                <h1>Age advisory:</h1>
+                <p>${movie.matureContent ? '15+' : 'All ages'}</p>
+            </ul>
+            <ul>
+                <h1>Genre:</h1>
+                <p>${escapeHtml(movie.genre)}</p>
+            </ul>
+            <ul>
+                <h1>Country:</h1>
+                <h2>${escapeHtml(movie.country)}</h2>
+            </ul>
+            <ul>
+                <h1>Description:</h1>
+                <p>${escapeHtml(movie.description)}</p>
+            </ul>
+        </div>
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+        <!--********* Cast Members *********-->
+        <div class="page_item movie_page_item member_item1">
+            <div class="member_container">
+                <!-- Cast members will be added here when available -->
+            </div>
+        </div>
+        <div class="page_item movie_page_item member_item2">
+            <div class="member_container">
+                <!-- More cast members will be added here when available -->
+            </div>
+        </div>
+    `;
+}
 
-</body>
-</html>
+function formatDuration(duration) {
+    try {
+        const hours = duration.match(/(\d+)H/)?.[1] || 0;
+        const minutes = duration.match(/(\d+)M/)?.[1] || 0;
+        return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+    } catch (e) {
+        return duration;
+    }
+}
+
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+</script>
+{% endblock %}
