@@ -36,91 +36,11 @@
   <a href="Community.html">Community</a>
   <a href="About.html">About</a>
 </div>
-
-<script>
-function openNav() {
-  document.getElementById("SideMenu").style.width = "250px";
-}
-
-function closeNav() {
-  document.getElementById("SideMenu").style.width = "0";
-}
-
-// Function to validate the registration form
-document.getElementById("formRegister").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent the default form submission
-
-    // Collect form data
-    const firstName = document.querySelector("[name='fname']").value.trim();
-    const lastName = document.querySelector("[name='lname']").value.trim();
-    const email = document.querySelector("[name='email']").value.trim();
-    const password1 = document.querySelector("[name='password1']").value.trim();
-    const password2 = document.querySelector("[name='password2']").value.trim();
-
-    // Placeholder for error messages
-    const errorPlaceholder = document.getElementById("errorMessagePlaceholder");
-    errorPlaceholder.innerHTML = ""; // Clear previous errors
-
-    // Validate inputs
-    let errors = [];
-
-    if (!firstName) errors.push("First name is required.");
-    if (!lastName) errors.push("Last name is required.");
-    if (!email || !validateEmail(email)) errors.push("A valid email address is required.");
-    if (!password1 || password1.length < 8) errors.push("Password must be at least 8 characters.");
-    if (password1 !== password2) errors.push("Passwords do not match.");
-
-    // If errors exist, show them and stop submission
-    if (errors.length > 0) {
-        errorPlaceholder.innerHTML = errors.join("<br>");
-        return;
-    }
-
-    // Prepare data to send to the server
-    const formData = {
-        fname: firstName,
-        lname: lastName,
-        email: email,
-        password1: password1,
-        password2: password2,
-    };
-
-    // Send data to the server
-    fetch("/api/register/", { // Update the URL to your API endpoint
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(data => {
-                throw new Error(data.message || "Failed to create account.");
-            });
-        }
-        return response.json();
-    })
-    .then(data => {
-        alert("Account created successfully! Redirecting to sign-in page...");
-        window.location.href = "SignIn.html"; // Redirect to the sign-in page
-    })
-    .catch(error => {
-        errorPlaceholder.innerHTML = error.message;
-    });
-});
-
-// Utility function to validate email
-function validateEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-}
-</script>
  
  <div class="pagecontent">
  
 	<form id="formRegister" class="formRegister" >
-	
+		{% csrf_token %}	
 		<h1>Create an Account </h1>
 		<label for="fname" class="fieldLabel">First Name:</label><br>
 		{{ form.fname }}<br>
@@ -179,19 +99,81 @@ function validateEmail(email) {
 </footer>
  
  <!--****************************************************-->
- 
- 
 
- 
+<script>
+function openNav() {
+  document.getElementById("SideMenu").style.width = "250px";
+}
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+function closeNav() {
+  document.getElementById("SideMenu").style.width = "0";
+}
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+// Function to validate the registration form
+document.getElementById("formRegister").addEventListener("submit", function(event) {
+	console.log("Im here!!!");
+    event.preventDefault(); // Prevent the default form submission
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+	const csrfToken = document.querySelector("[name='csrfmiddlewaretoken']").value;
+	console.log("my token is", csrfToken);
+    // Collect form data
+    const firstName = document.querySelector("[name='fname']").value.trim();
+    const lastName = document.querySelector("[name='lname']").value.trim();
+    const email = document.querySelector("[name='email']").value.trim();
+    const password1 = document.querySelector("[name='password1']").value.trim();
+    const password2 = document.querySelector("[name='password2']").value.trim();
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+    // Placeholder for error messages
+    const errorPlaceholder = document.getElementById("errorMessagePlaceholder");
+    errorPlaceholder.innerHTML = ""; // Clear previous errors
 
-<script src="{% static 'js/Register.js' %}"></script>
+    // Validate inputs
+    let errors = [];
+
+    if (!firstName) errors.push("First name is required.");
+    if (!lastName) errors.push("Last name is required.");
+    if (!email || !validateEmail(email)) errors.push("A valid email address is required.");
+    if (!password1 || password1.length < 8) errors.push("Password must be at least 8 characters.");
+    if (password1 !== password2) errors.push("Passwords do not match.");
+
+    // If errors exist, show them and stop submission
+    if (errors.length > 0) {
+        errorPlaceholder.innerHTML = errors.join("<br>");
+        return;
+    }
+
+	const formData = new FormData(formRegister);
+
+    // Send data to the server
+    fetch("/api/register/", { // Update the URL to your API endpoint
+        method: "POST",
+        headers: {
+			"X-CSRFToken": csrfToken, // Add this line
+        },
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(data => {
+                throw new Error(data.message || "Failed to create account.");
+            });
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert("Account created successfully! Redirecting to sign-in page...");
+        window.location.href = "SignIn.html"; // Redirect to the sign-in page
+    })
+    .catch(error => {
+        errorPlaceholder.innerHTML = error.message;
+    });
+});
+
+// Utility function to validate email
+function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+</script>
 </body>
 </html>
