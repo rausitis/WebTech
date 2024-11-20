@@ -357,8 +357,8 @@ def RegisterUser(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            email = form.cleaned_data.get('femail')
-            password = form.cleaned_data.get('fpass')
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password1')
             user = authenticate(email=email, password=password)
             login(request, user)
             return redirect('landing-page')
