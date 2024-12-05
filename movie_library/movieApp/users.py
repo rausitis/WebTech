@@ -8,6 +8,7 @@ class UserRegisterForm(UserCreationForm):
     fname = forms.CharField(max_length=100)
     lname = forms.CharField(max_length=100)
     email = forms.EmailField()
+    phonenum = forms.NumberInput()
     password1 = forms.CharField(label='Password:', widget=forms.PasswordInput, min_length=8)
     password2 = forms.CharField(label='Re-enter Password:', widget=forms.PasswordInput, min_length=8)
 

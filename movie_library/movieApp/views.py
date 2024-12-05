@@ -5,7 +5,10 @@ from . import serializers
 from rest_framework.views import APIView
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from .users import UserRegisterForm
+from django.core.exceptions import ObjectDoesNotExist
+
+from rest_framework.authtoken.models import Token
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class UserInfoViewset(APIView):
@@ -69,7 +72,7 @@ class UserInfoViewset(APIView):
             )
 
     def delete(self, request, id=None):
-        item = models.UserInfo.objects.filter(id=id)
+        item = models.UserInfo.objects.all()
         print(item)
         item.delete()
         return Response(
@@ -352,16 +355,48 @@ class MovieMakersViewset(APIView):
             {"status": "success", "data": "Item Deleted"}
         )
 
-def RegisterUser(request):
-    if request.method == "POST":
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            email = form.cleaned_data.get('email')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(email=email, password=password)
-            login(request, user)
-            return redirect('landing-page')
-    else:
-        form = UserRegisterForm()
-    return render(request, "Register.html", {'form':form})
+# def RegisterUser(request):
+#     if request.method == "POST":
+#         form = UserRegisterForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             email = form.cleaned_data.get('email')
+#             password = form.cleaned_data.get('password1')
+#             user = authenticate(email=email, password=password)
+#             login(request, user)
+#             return redirect('landing-page')
+#     else:
+#         form = UserRegisterForm()
+#     return render(request, "Register.html", {'form':form})
+
+class UserLoginViewset(APIView):
+
+    def post(self, request, id=None):
+        username = request.data.get('email')
+        password = request.data.get('password')
+
+        user = None
+        if '@' in username:
+            try:
+                user = models.UserInfo.objects.get(email=username)
+            except ObjectDoesNotExist:
+                pass
+
+        if not user:
+            user = authenticate(username=username, password=password)
+
+        if user:
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key}, status=status.HTTP_200_OK)
+
+        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+    
+class UserLogoutViewset(APIView):
+
+    def post(self, request, id=None):
+        try:
+            # Delete the user's token to logout
+            request.user.auth_token.delete()
+            return Response({'message': 'Successfully logged out.'}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -9,7 +9,18 @@ from .models import MovieMakers
 class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserInfo
-        fields = '__all__'
+        fields = ['firstname', 'lastname', 'email', 'phoneNo', 'password']
+
+    def create(self, validated_data):
+        user = UserInfo (
+            firstname = validated_data['firstname'],
+            lastname = validated_data['lastname'],
+            email = validated_data['email'],
+            phoneNo = validated_data['phoneNo']
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
 
 
 class ContentSerializer(serializers.ModelSerializer):

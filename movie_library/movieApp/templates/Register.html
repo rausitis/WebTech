@@ -54,6 +54,7 @@ document.getElementById("formRegister").addEventListener("submit", function(even
     const firstName = document.querySelector("[name='fname']").value.trim();
     const lastName = document.querySelector("[name='lname']").value.trim();
     const email = document.querySelector("[name='email']").value.trim();
+    const phoneNo = document.querySelector("[name='phoneNo']").value.trim();
     const password1 = document.querySelector("[name='password1']").value.trim();
     const password2 = document.querySelector("[name='password2']").value.trim();
 
@@ -67,6 +68,7 @@ document.getElementById("formRegister").addEventListener("submit", function(even
     if (!firstName) errors.push("First name is required.");
     if (!lastName) errors.push("Last name is required.");
     if (!email || !validateEmail(email)) errors.push("A valid email address is required.");
+    if (!phoneNo) errors.push("Phone number is required.");
     if (!password1 || password1.length < 8) errors.push("Password must be at least 8 characters.");
     if (password1 !== password2) errors.push("Passwords do not match.");
 
@@ -81,6 +83,7 @@ document.getElementById("formRegister").addEventListener("submit", function(even
         fname: firstName,
         lname: lastName,
         email: email,
+        phonenum: phoneNo,
         password1: password1,
         password2: password2,
     };
@@ -128,6 +131,8 @@ function validateEmail(email) {
 		{{ form.lname }}<br>
 		<label for="femail" class="fieldLabel">Email:</label><br>
 		{{ form.email }}<br>
+		<label for="fphonenum" class="fieldLabel">Phone Number:</label><br>
+		{{ form.phoneNo }}<br>
 		<label for="fpass" class="fieldLabel">Password:</label><br>
 		{{ form.password1 }}<br>
 		<p><i>*Passwords must be at least 8 characters.</i></p>

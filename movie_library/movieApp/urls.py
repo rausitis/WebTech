@@ -1,4 +1,6 @@
 from .views import UserInfoViewset
+from .views import UserLoginViewset
+from .views import UserLogoutViewset
 from .views import ContentViewset
 from .views import CastMembersViewset
 from .views import FavoriteContentViewset
@@ -6,7 +8,7 @@ from .views import MovieMakersViewset
 from django.views.generic import TemplateView
 
 from django.urls import path
-from .views import RegisterUser
+# from .views import RegisterUser
 
 
 urlpatterns = [
@@ -14,6 +16,12 @@ urlpatterns = [
     # REST APIs - interacting with DB
     path('userinfo/', UserInfoViewset.as_view()),
     path('userinfo/<int:id>/', UserInfoViewset.as_view()),
+
+    path('userlogin/', UserLoginViewset.as_view()),
+    path('userlogin/<int:id>/', UserLoginViewset.as_view()),
+
+    path('userlogout/', UserLogoutViewset.as_view()),
+    path('userlogout/<int:id>/', UserLogoutViewset.as_view()),
 
     path('content/', ContentViewset.as_view()),
     path('content/<int:id>/', ContentViewset.as_view()),
@@ -67,7 +75,10 @@ urlpatterns = [
          TemplateView.as_view(template_name="MoviesByCountry.html"),
          name="movies-by-country-page"),
 
-    path('register/', RegisterUser, name="registration-page"),
+#     path('register/', RegisterUser, name="registration-page"),
+     path('register/',
+         TemplateView.as_view(template_name="Register.html"),
+         name="register-page"),
 
     path('signin/', TemplateView.as_view(template_name="SignIn.html"),
          name="sign-in-page"),

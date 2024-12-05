@@ -3,15 +3,17 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 
-class UserInfo(models.Model):
+class UserInfo(AbstractUser):
     username = models.CharField(max_length=255, unique=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
     firstname = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255)
-    age = models.PositiveIntegerField()
+    age = models.PositiveIntegerField(default=0)
     gender = models.CharField(max_length=255)
     createdAt = models.DateTimeField(default=timezone.now)
     modifiedAt = models.DateTimeField(auto_now=True)
@@ -33,9 +35,9 @@ class Content(models.Model):
     seasonsNo = models.PositiveIntegerField()
     createdAt = models.DateTimeField(default=timezone.now)
     modifiedAt = models.DateTimeField(auto_now=True)
-    createdBy = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,
+    createdBy = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True,
                                   blank=True, related_name='createdContent')
-    modifiedBy = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,
+    modifiedBy = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True,
                                    blank=True, related_name='modifiedContent')
 
     def __str__(self):
@@ -50,9 +52,9 @@ class CastMembers(models.Model):
     createdAt = models.DateTimeField(default=timezone.now)
     modifiedAt = models.DateTimeField(auto_now=True)
     movieStar = models.BooleanField()
-    createdBy = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,
+    createdBy = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True,
                                   blank=True, related_name='createdCast')
-    modifiedBy = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,
+    modifiedBy = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True,
                                    blank=True, related_name='modifiedCast')
 
     def __str__(self):
@@ -78,10 +80,10 @@ class MovieMakers(models.Model):
     contentId = models.ForeignKey(Content, on_delete=models.CASCADE)
     createdAt = models.DateTimeField(default=timezone.now)
     modifiedAt = models.DateTimeField(auto_now=True)
-    createdBy = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,
+    createdBy = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True,
                                   blank=True,
                                   related_name='createdMovieMakers')
-    modifiedBy = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,
+    modifiedBy = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True,
                                    blank=True,
                                    related_name='modifiedMovieMakers')
 

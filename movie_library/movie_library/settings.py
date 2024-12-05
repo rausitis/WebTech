@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'phonenumber_field',
     'widget_tweaks',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +152,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+AUTH_USER_MODEL = 'movieApp.UserInfo'
