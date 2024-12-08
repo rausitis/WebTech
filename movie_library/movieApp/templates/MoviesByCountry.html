@@ -1,510 +1,56 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<meta name="description" content="Comunity for movie lovers">
-	<meta name="keywords" content="Film, Movie, TV, TV-Show, Actor, Director, Comunity, Discussion, New in Theaters">
-	<meta name="author" content="Group 15">
-
-	<link rel="stylesheet" href="{% static 'CSSstyles/styles.css' %}">
-    <link rel="stylesheet" href="{% static 'CSSstyles/styles_menu_bar.css' %}">
-    <link rel="stylesheet" href="{% static 'CSSstyles/styles_registration_page.css' %}">
-	<link rel="stylesheet" href="{% static 'CSSstyles/styles_movies_by_country.css' %}">
-	
-
-</head>
-<body>
-
-<!--********* TOP BAR *********-->
-<div class="topbar">
-  <a class="active"  href="LandingPage.html"><img style="width:50px" src="{% static 'images/Logo.png' %}"></a>	
-  <a onclick="openNav()">Menu</a>
-  <a class="right-align" style = "font-weight: bold;" href="SignIn.html">Sign In</a>
-  <a class="right-align" href="Register.html">Register</a>
-  <input type="text" placeholder="Search..">
+{% block content %}
+<!--********* Banner Section *********-->
+<div class="aboutpage_page_container">
+    <div class="page_item aboutpage_item">
+        <div class="aboutpage">
+            <div class="banner">
+                <img src="{% static 'movieApp/images/AboutPageBanner/Italian_Claasic.jpg' %}">
+                <img src="{% static 'movieApp/images/AboutPageBanner/Pans_labyrinth_2.jpg' %}">
+                <img src="{% static 'movieApp/images/AboutPageBanner/Schindlers-List-Typing.jpg' %}">
+                <img src="{% static 'movieApp/images/AboutPageBanner/Matrix3.jpg' %}">
+                <img src="{% static 'movieApp/images/AboutPageBanner/Schindlers_List.jpg' %}">
+                <img src="{% static 'movieApp/images/AboutPageBanner/Pans_labyrinth.jpg' %}">
+                <img src="{% static 'movieApp/images/AboutPageBanner/La-la-Land.jpg' %}">
+                <img src="{% static 'movieApp/images/AboutPageBanner/Avatar_2.jpg' %}">
+                <div class="text" style="margin-top:50px">Movies by country</div>
+            </div>
+        </div>
+    </div>
 </div>
 
-
-<!--********* Side Menu *********-->
-<div id="SideMenu" class="sidemenu">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="Movies.html">Movies</a>
-  <a href="TVShows.html">TV Shows</a>
-  <a href="CastAndCrew.html">Cast & Crew</a>
-  <a href="Community.html">Community</a>
-  <a href="About.html">About</a>
-</div>
-
-<script>
-	function openNav() {
-	  document.getElementById("SideMenu").style.width = "250px";
-	}
-
-	function closeNav() {
-	  document.getElementById("SideMenu").style.width = "0";
-	}
-</script>
-
-
-
-
-
-
-
-
- 
- <!--*****************************************************-->
- <div class="aboutpage_page_container">
-	<!--********* About Page *********-->
-	<div class="page_item aboutpage_item">
-		<div class="aboutpage">
-			<div class="banner">
-				<img src="{% static 'images/About_page/Italian_Claasic.jpg' %}">
-				<img src="{% static 'images/About_page/Pans_labyrinth_2.jpg' %}">
-				<img src="{% static 'images/About_page/Schindlers-List-Typing.jpg' %}">
-				<img src="{% static 'images/About_page/Matrix3.jpg' %}">
-				<img src="{% static 'images/About_page/Schindlers_List.jpg' %}">
-				<img src="{% static 'images/About_page/Pans_labyrinth.jpg' %}">
-				<img src="{% static 'images/About_page/La-la-Land.jpg' %}">
-				<img src="{% static 'images/About_page/Avatar_2.jpg' %}">
-				<div class="text" style="margin-top:50px">Movies by country</div>
-			<!--
-			-->
-			</div>
+<!--***************** Page content *****************-->
+<div class="page_container mbc_page_container"> 
+	{% for country in countries %}
+	<!--********* Country {{ forloop.counter }} *********-->
+	<div class="page_item mbc_page_item title_item">
+		<a href="{% url 'movieApp:movies_of_country' country.id %}">
+			<h1>{{ country.name }}</h1>
+		</a>
+	</div>
+	<!--********* Photos *********-->
+	{% for movie in country.movies %}
+	<div class="page_item mbc_page_item photo_item">
+		<div class="photo_item_img_frame">
+			<a href="{% url 'movieApp:movie_detail' movie.id %}">
+				<img src="{% static 'movieApp/images/Movies/'|add:movie.image_path %}">
+				<div class="overlay">
+				</div>
+			</a>
+		</div>
+		<div class="photo_item_name_frame">
+			<a href="{% url 'movieApp:movie_detail' movie.id %}">
+				<h1>{{ movie.title }}</h1>
+			</a>
 		</div>
 	</div>
+	{% endfor %}
+	{% endfor %}
 </div>
- 
- 
+{% endblock %}
 
- <!--***************** Page content *****************-->
-<div class="page_container mbc_page_container"> 
-	
-	<!--********* Movies by country *********-->
-	
-	<!--********* 
-	<div class="page-item topcontent-item1 topcontent">
-		<a href="Movies.html">
-			<div>
-				<img src="../images/Top_Content/nosferatu.jpg">
-				<div class="overlay">
-					<h1>Movies</h1><p>Upcoming releases</p>
-				</div>
-			</div>			
-		</a>
-	</div> *********-->
-	
-	
-	<!--********* Country 1 *********-->
-	<!--********* Title *********-->
-	<div class="page_item mbc_page_item title_item">
-		<a href="Country_movies.html">
-			<h1>Country1</h1>	
-		</a>
-	</div>
-	<!--********* Photos *********-->
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Country_movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Country_movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Country_movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Country_movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Country_movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Country_movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Country_movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	
-	
-	<!--********* Country 2 *********-->
-	<!--********* Title *********-->
-	<div class="page_item mbc_page_item title_item">
-		<a href="Movies.html">
-			<h1>Country2</h1>	
-		</a>
-	</div>
-	<!--********* Photos *********-->
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-
-	<!--********* Country 3 *********-->
-	<!--********* Title *********-->
-	<div class="page_item mbc_page_item title_item">
-		<a href="Movies.html">
-			<h1>Country3</h1>	
-		</a>
-	</div>
-	<!--********* Photos *********-->
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	
-	<!--********* Country 4 *********-->
-	<!--********* Title *********-->
-	<div class="page_item mbc_page_item title_item">
-		<a href="Movies.html">
-			<h1>Country4</h1>	
-		</a>
-	</div>
-	<!--********* Photos *********-->
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	
-	<!--********* Country 5 *********-->
-	<!--********* Title *********-->
-	<div class="page_item mbc_page_item title_item">
-		<a href="Movies.html">
-			<h1>Country5</h1>	
-		</a>
-	</div>
-	<!--********* Photos *********-->
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-
-	<!--********* Country 6 *********-->
-	<!--********* Title *********-->
-	<div class="page_item mbc_page_item title_item">
-		<a href="Movies.html">
-			<h1>Country6</h1>	
-		</a>
-	</div>
-	<!--********* Photos *********-->
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	<div class="page_item mbc_page_item photo_item1 photo_item_style ">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-		<a href="Movies.html">
-			<h1>Movies</h1>			
-		</a>
-	</div>
-	
-
-	
-
-	
-
-	
-	
-
-</div>
-<!--***************** Page content end *****************-->
-
-<!--********* Footer *********-->
-<footer class="footer">
-	<div>
-		<h1><b>Social media</b></h1>
-		<p>
-		<a href="https://discord.com/">Discord</a><br>
-		<a href="https://www.instagram.com/">Instagram</a><br>
-		<a href="https://www.facebook.com/homeofmovies29/">Facebook</a><br>
-		<a href="https://www.reddit.com/?rdt=34230">Redit</a><br>
-		</p>
-	</div>
-	<div>
-		<h1><b>Authors</b></h1>
-		<p> 
-			Stanislaw Krzysztof Graczykowski<br>
-			Paul-Constantin Axinte<br>
-			Krzysztof Sekulski<br>
-			Eugénia Ficková<br>
-			Alexandre Jorge Duarte Marques Pinto<br>
-			Ruta Miglava
-		</p>
-	</div>
-	<div>
-		<h1><b>Contact Us</b></h1>
-		<p> 
-			email@email.com<br>
-			SDU<br>
-			Sonderborg<br>
-			Denmark
-		</p>
-	</div>
-</footer>
-
- 
- 
- 
- 
- 
- 
- 
- <!--****************************************************-->
- 
- 
-
- 
-
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-
-<script src="{% static 'js/MoviesByCountry.js' %}"></script>
-</body>
-</html>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'movieApp/CSSstyles/styles_movies_by_country.css' %}">
+{% endblock %}

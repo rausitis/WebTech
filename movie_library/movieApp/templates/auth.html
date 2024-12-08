@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        background-color: #383838;
+        font-family: Arial, sans-serif;
+    }
+
+    .form-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #3f87a6, #ebf8e1);
+    }
+
+    .form-card {
+        width: 100%;
+        max-width: 450px;
+        padding: 30px;
+        border-radius: 15px;
+        background-color: white;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-card h3 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .form-card label {
+        font-weight: 600;
+        color: #444;
+    }
+
+    .form-card input {
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        transition: border-color 0.3s;
+    }
+
+    .form-card input:focus {
+        border-color: #3f87a6;
+        outline: none;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+        background-color: #3f87a6;
+        border: none;
+        color: white;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #2b678a;
+    }
+
+    .d-grid {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="form-container">
+    <div class="form-card">
+        <h3>Login</h3>
+        <form action="" method="POST" autocomplete="off">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
