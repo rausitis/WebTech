@@ -1,176 +1,64 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<meta name="description" content="Comunity for movie lovers">
-	<meta name="keywords" content="Film, Movie, TV, TV-Show, Actor, Director, Comunity, Discussion, New in Theaters">
-	<meta name="author" content="Group 15">
-
-	<link rel="stylesheet" href="{% static 'CSSstyles/styles.css' %}">
-    <link rel="stylesheet" href="{% static 'CSSstyles/styles_menu_bar.css' %}">
-    <link rel="stylesheet" href="{% static 'CSSstyles/styles_registration_page.css' %}">
-
-</head>
-
-
-<body>
-
-<!--********* TOP BAR *********-->
-<div class="topbar">
-  <a class="active"  href="LandingPage.html"><img style="width:50px" src="{% static 'images/Logo.png' %}"></a>	
-  <a onclick="openNav()">Menu</a>
-  <a class="right-align" style = "font-weight: bold;" href="SignIn.html">Sign In</a>
-  <a class="right-align" href="Register.html">Register</a>
-  <input type="text" placeholder="Search..">
-</div>
-
-
-<!--********* Side Menu *********-->
-<div id="SideMenu" class="sidemenu">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="Movies.html">Movies</a>
-  <a href="TVShows.html">TV Shows</a>
-  <a href="CastAndCrew.html">Cast & Crew</a>
-  <a href="Community.html">Community</a>
-  <a href="About.html">About</a>
-</div>
-
-<script>
-	function openNav() {
-	  document.getElementById("SideMenu").style.width = "250px";
-	}
-
-	function closeNav() {
-	  document.getElementById("SideMenu").style.width = "0";
-	}
-</script>
- 
- <!--*****************************************************-->
- <div class="aboutpage_page_container">
-	<!--********* About Page *********-->
+{% block content %}
+<div class="aboutpage_page_container">
 	<div class="page_item aboutpage_item">
 		<div class="aboutpage">
 			<div class="banner">
-				<img src="{% static 'images/About_page/Italian_Claasic.jpg' %}">
-				<img src="{% static 'images/About_page/Pans_labyrinth_2.jpg' %}">
-				<img src="{% static 'images/About_page/Schindlers-List-Typing.jpg' %}">
-				<img src="{% static 'images/About_page/Matrix3.jpg' %}">
-				<img src="{% static 'images/About_page/Schindlers_List.jpg' %}">
-				<img src="{% static 'images/About_page/Pans_labyrinth.jpg' %}">
-				<img src="{% static 'images/About_page/La-la-Land.jpg' %}">
-				<img src="{% static 'images/About_page/Avatar_2.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Italian_Claasic.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Pans_labyrinth_2.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Schindlers-List-Typing.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Matrix3.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Schindlers_List.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Pans_labyrinth.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/La-la-Land.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Avatar_2.jpg' %}">
 				<div class="text">A welcoming community for all movie lovers</div>
-			<!--
-			-->
 			</div>
 		</div>
 	</div>
 </div>
- 
- 
- 
- <!--***************** Page content *****************-->
 <div class="page_container landing_page_container">
-	<!--********* Top content *********-->
-	<div class="page_item topcontent_item1 topcontent">
-		<a href="MoviesByCountry.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-					<h1>Movies by country</h1>
-				</div>
-			</div>			
-		</a>
-	</div>
-	<div class="page_item topcontent_item2 topcontent">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-					<h1>Movies</h1><p>Upcoming releases</p>
-				</div>
-			</div>			
-		</a>
-	</div>
-	<div class="page_item topcontent_item3 topcontent">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-					<h1>Movies</h1><p>Upcoming releases</p>
-				</div>
-			</div>			
-		</a>
-	</div>
-	<div class="page_item topcontent_item4 topcontent">
-		<a href="Movies.html">
-			<div>
-				<img src="{% static 'images/Top_Content/nosferatu.jpg' %}">
-				<div class="overlay">
-					<h1>Movies</h1><p>Upcoming releases</p>
-				</div>
-			</div>			
-		</a>
-	</div>
+    <div class="page_item topcontent_item1 topcontent">
+        <a href="{% url 'movieApp:movies' %}">
+            <div>
+                <img src="{% static 'movieApp/images/LandingPage/TopMovie.jpg' %}">
+                <div class="overlay">
+                    <h1>Movies</h1>
+                </div>
+            </div>			
+        </a>
+    </div>
+    <div class="page_item topcontent_item2 topcontent">
+        <a href="{% url 'movieApp:tv_shows' %}">
+            <div>
+                <img src="{% static 'movieApp/images/LandingPage/TopTVShow.jpg' %}">
+                <div class="overlay">
+                    <h1>TV Shows</h1>
+                </div>
+            </div>			
+        </a>
+    </div>
+    <div class="page_item topcontent_item3 topcontent">
+        <a href="{% url 'movieApp:cast_and_crew' %}">
+            <div>
+                <img src="{% static 'movieApp/images/LandingPage/TopCrew.jpg' %}">
+                <div class="overlay">
+                    <h1>Cast and Crew</h1>
+                </div>
+            </div>			
+        </a>
+    </div>
+    <div class="page_item topcontent_item4 topcontent">
+        <a href="{% url 'movieApp:community' %}">
+            <div>
+                <img src="{% static 'movieApp/images/LandingPage/TopContent.jpg' %}">
+                <div class="overlay">
+                    <h1>Community</h1>
+                </div>
+            </div>			
+        </a>
+    </div>
 </div>
-<!--***************** Page content end *****************-->
-
-<!--********* Footer *********-->
-<footer class="footer">
-	<div>
-		<h1><b>Social media</b></h1>
-		<p>
-		<a href="https://discord.com/">Discord</a><br>
-		<a href="https://www.instagram.com/">Instagram</a><br>
-		<a href="https://www.facebook.com/homeofmovies29/">Facebook</a><br>
-		<a href="https://www.reddit.com/?rdt=34230">Redit</a><br>
-		</p>
-	</div>
-	<div>
-		<h1><b>Authors</b></h1>
-		<p> 
-			Stanislaw Krzysztof Graczykowski<br>
-			Paul-Constantin Axinte<br>
-			Krzysztof Sekulski<br>
-			Eugénia Ficková<br>
-			Alexandre Jorge Duarte Marques Pinto<br>
-			Ruta Miglava
-		</p>
-	</div>
-	<div>
-		<h1><b>Contact Us</b></h1>
-		<p> 
-			email@email.com<br>
-			SDU<br>
-			Sonderborg<br>
-			Denmark
-		</p>
-	</div>
-</footer>
-
- 
- 
- 
- 
- 
- 
- 
- <!--****************************************************-->
- 
- 
-
- 
-
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-
-<script src="{% static 'js/LandingPage.js' %}"></script>
-</body>
-</html>
+{% endblock %}
