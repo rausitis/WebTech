@@ -7,4 +7,5 @@ urlpatterns = [
     path('api/', include('movieApp.api_routes')),
     path('', include('movieApp.urls')),
     # path('', include('TwoFAUserApp.urls')),
+    # path('api/', include('movieApp.api_routes')),
 ]
