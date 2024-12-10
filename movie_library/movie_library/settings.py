@@ -58,13 +58,12 @@ INSTALLED_APPS = [
     'movieApp',
     'corsheaders',
     'rest_framework',
-
-    # 2FA extension EF
     'phonenumber_field',
     'django_twilio',
     'TwoFAUserApp',
     'crispy_forms',
     'crispy_bootstrap4',
+    'widget_tweaks',
 ]
 
 # 2FA extension EF
