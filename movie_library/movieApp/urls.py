@@ -7,5 +7,5 @@ app_name = 'movieApp'
 
 urlpatterns = [
     path('', include(template_routes)),
-    path('api/', include(api_routes)),
+    path('', include(api_routes)),
 ]

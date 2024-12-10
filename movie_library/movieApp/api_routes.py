@@ -11,8 +11,8 @@ from django.urls import path
 
 urlpatterns = [
     # REST APIs - interacting with DB
-    path('userinfo/', UserInfoViewset.as_view()),
-    path('userinfo/<int:id>/', UserInfoViewset.as_view()),
+    path('users/', UserInfoViewset.as_view()),
+    path('users/<int:id>/', UserInfoViewset.as_view()),
 
     path('content/', ContentViewset.as_view()),
     path('content/<int:id>/', ContentViewset.as_view()),
@@ -65,9 +65,6 @@ urlpatterns = [
     path('moviesbycountry/',
          TemplateView.as_view(template_name="MoviesByCountry.html"),
          name="movies-by-country-page"),
-
-    path('register/', TemplateView.as_view(template_name="Register.html"),
-         name="registration-page"),
 
     path('signin/', TemplateView.as_view(template_name="SignIn.html"),
          name="sign-in-page"),

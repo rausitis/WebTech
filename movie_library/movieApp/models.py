@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
@@ -7,22 +7,41 @@ from TwoFAUserApp.models import TwoFAUser
 import random
 
 
-class UserInfo(models.Model):
+class UserInfoManager(BaseUserManager):
+    def create_user(self, email, username, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, username=username, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, username, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        return self.create_user(email, username, password, **extra_fields)
+
+
+class UserInfo(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=255, unique=True)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=255)
     firstname = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255)
-    age = models.PositiveIntegerField()
-    gender = models.CharField(max_length=255)
     createdAt = models.DateTimeField(default=timezone.now)
     modifiedAt = models.DateTimeField(auto_now=True)
     phoneNo = PhoneNumberField(_("Phone Number"), blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+
+    objects = UserInfoManager()
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        return self.username
+        return self.email
 
 
 class Content(models.Model):

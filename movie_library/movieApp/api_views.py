@@ -5,11 +5,14 @@ from . import serializers
 from rest_framework.views import APIView
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from .users import UserRegisterForm
+import logging
+
+# Set up logging
+logger = logging.getLogger(__name__)
 
 
 class UserInfoViewset(APIView):
-    def get(self, request, id=None):
+    def get(self, id=None):
         if id:
             try:
                 item = models.UserInfo.objects.get(id=id)
@@ -31,19 +34,52 @@ class UserInfoViewset(APIView):
             status=status.HTTP_200_OK
         )
 
-    def post(self, request, id=None):
-        serializer = serializers.UserInfoSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(
-                {"status": "success", "data": serializer.data},
-                status=status.HTTP_201_CREATED
+    def post(self, request):
+        logger.info("Received user creation request")
+        logger.debug(f"Request data: {request.data}")
+
+        try:
+            # Extract data from request
+            data = {
+                'username': request.data.get('email'),  # Using email as username
+                'email': request.data.get('email'),
+                'firstname': request.data.get('first_name'),
+                'lastname': request.data.get('last_name'),
+                'phoneNo': request.data.get('phone_number'),
+                'password': request.data.get('password')
+            }
+
+            # Validate required fields
+            required_fields = ['email', 'password']
+            missing_fields = [field for field in required_fields if not data.get(field)]
+            if missing_fields:
+                return Response({
+                    'success': False,
+                    'message': f"Missing required fields: {', '.join(missing_fields)}"
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            # Create user
+            user = models.UserInfo.objects.create_user(
+                email=data['email'],
+                username=data['username'],
+                password=data['password'],
+                firstname=data.get('firstname', ''),
+                lastname=data.get('lastname', ''),
+                phoneNo=data.get('phoneNo')
             )
-        else:
-            return Response(
-                {"status": "error", "data": serializer.errors},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+
+            login(request, user)
+            return Response({
+                'success': True,
+                'user_id': user.id
+            }, status=status.HTTP_201_CREATED)
+
+        except Exception as e:
+            logger.exception("Registration error")
+            return Response({
+                'success': False,
+                'message': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, id=None):
         try:
@@ -351,17 +387,3 @@ class MovieMakersViewset(APIView):
         return Response(
             {"status": "success", "data": "Item Deleted"}
         )
-
-def RegisterUser(request):
-    if request.method == "POST":
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            email = form.cleaned_data.get('email')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(email=email, password=password)
-            login(request, user)
-            return redirect('landing-page')
-    else:
-        form = UserRegisterForm()
-    return render(request, "Register.html", {'form':form})
