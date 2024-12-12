@@ -4,7 +4,7 @@ from . import models
 from . import serializers
 from rest_framework.views import APIView
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 import logging
 
 # Set up logging
@@ -35,6 +35,45 @@ class UserInfoViewset(APIView):
         )
 
     def post(self, request):
+        if 'logout' in request.data:
+            logout(request)
+            return Response({'success': True})
+            
+        # Check if this is a login request
+        if 'login' in request.data:
+            try:
+                email = request.data.get('email')
+                password = request.data.get('password')
+
+                if not email or not password:
+                    return Response({
+                        'success': False,
+                        'message': 'Email and password are required'
+                    }, status=status.HTTP_400_BAD_REQUEST)
+
+                # Use email as username for authentication
+                user = authenticate(request, username=email, password=password)
+                
+                if user is not None:
+                    login(request, user)
+                    return Response({
+                        'success': True,
+                        'user_id': user.id
+                    }, status=status.HTTP_200_OK)
+                else:
+                    return Response({
+                        'success': False,
+                        'message': 'Invalid credentials'
+                    }, status=status.HTTP_401_UNAUTHORIZED)
+
+            except Exception as e:
+                logger.exception("Login error")
+                return Response({
+                    'success': False,
+                    'message': str(e)
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+        # If not a login request, handle registration as before
         logger.info("Received user creation request")
         logger.debug(f"Request data: {request.data}")
 

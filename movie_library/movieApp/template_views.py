@@ -42,6 +42,11 @@ def country_movies(request):
 
 
 def register(request):
+    if request.method == 'POST':
+        # Your existing registration logic here
+        # After successful registration:
+        return redirect('landing_page')
+    # Your existing GET logic here
     return render(request, 'Register.html')
 
 
