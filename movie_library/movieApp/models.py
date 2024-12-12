@@ -1,9 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import PermissionsMixin
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
-from TwoFAUserApp.models import TwoFAUser
+# from TwoFAUserApp.models import TwoFAUser
 import random
 
 
@@ -122,7 +123,7 @@ class MovieMakers(models.Model):
 
 class Code(models.Model):
     codenumber = models.CharField(max_length=5, blank=True)
-    user = models.OneToOneField(TwoFAUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(UserInfo, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.codenumber)

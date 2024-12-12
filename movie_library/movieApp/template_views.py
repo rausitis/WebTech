@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from movieApp.serializers import CodeForm
-from TwoFAUserApp.models import TwoFAUser
+from movieApp.models import UserInfo
 from .utils import send_sms
 from movieApp.models import Code
 import random
@@ -73,7 +73,7 @@ def auth_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             request.session['pk'] = user.pk
-            return redirect('verify_view')
+            return redirect('movieApp:verify_view')
     return render(request, 'auth.html', {'form': form})
 
 
@@ -85,8 +85,8 @@ def verify_view(request):
         return redirect('auth_view')
 
     try:
-        user = TwoFAUser.objects.get(pk=pk)
-    except TwoFAUser.DoesNotExist:
+        user = UserInfo.objects.get(pk=pk)
+    except UserInfo.DoesNotExist:
         return redirect('auth_view')
 
     if request.method == "GET" and not request.POST:
@@ -103,14 +103,14 @@ def verify_view(request):
         code.save()
 
         code_user = f"{user.username}: {code.codenumber}"
-        send_sms(code_user, user.phone_number)
+        send_sms(code_user, user.phoneNo)
 
     if request.method == "POST" and form.is_valid():
         num = form.cleaned_data.get('codenumber')
         code = Code.objects.get(user=user)
         if str(code.codenumber) == str(num):
             login(request, user)
-            return redirect('home_view')
+            return redirect('movieApp:home_view')
         else:
             form.add_error('codenumber', 'Invalid code. Please try again.')
 

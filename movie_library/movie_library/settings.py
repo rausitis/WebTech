@@ -63,14 +63,14 @@ INSTALLED_APPS = [
     'TwoFAUserApp',
     'crispy_forms',
     'crispy_bootstrap4',
-    'widget_tweaks',
+    # 'widget_tweaks',
 ]
 
 AUTH_USER_MODEL = 'movieApp.UserInfo'
 # 2FA extension EF
 # AUTH_USER_MODEL = 'TwoFAUserApp.TwoFAUser'
-# CRISPY_TEMPLATE_PACK = 'bootstrap4'
-# LOGIN_URL = '/login/'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_URL = '/login/'
 
 
 MIDDLEWARE = [
