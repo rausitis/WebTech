@@ -85,22 +85,50 @@
         grid-column: 1 / -1;
         color: #d32f2f;
     }
+
+    #pagination-container {
+        text-align: center;
+        margin: 20px 0;
+    }
 </style>
 {% endblock %}
 
 {% block extra_js %}
 <script>
+
+    // pagination variavles
+    let currentPage = 1; // starting page lol
+    let totalPages = 1;
+    let itemsPerPage = 9; // after loading the page, how many elements it will display
+
     document.addEventListener('DOMContentLoaded', function() {
-        fetchMovies();
+        fetchMovies(currentPage, itemsPerPage); //initial fetch for first page rload
+
+        // menu select-option for the items pr page
+        document.getElementById('listed-elements').addEventListener('change', function() {
+            itemsPerPage = parseInt(this.value, 10);
+
+            currentPage = 1; //reset to first page after changing the items count per page
+            fetchMovies(currentPage, itemsPerPage);
+        });
     });
 
-    function fetchMovies() {
-        fetch('/api/content/')
+
+    function fetchMovies(page = 1, pageSize = itemsPerPage) {
+        fetch(`/api/content/?page=${page}&page_size=${pageSize}`)
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
                     const movies = data.data.filter(item => item.type.toLowerCase() === 'movie');
                     displayMovies(movies);
+
+                    currentPage = data.pagination.current_page; //current page update
+                    const totalItems = data.pagination.total_items; //total number of the itemssssss
+                    totalPages = Math.ceil(totalItems / itemsPerPage); // calculating total pages
+                    //update for page info numbers
+                    updatePageInfo();
+                    updatePaginationButtons();
+
                 } else {
                     throw new Error('Failed to fetch movies');
                 }
@@ -164,5 +192,52 @@
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
     }
+
+
+// js buttons for pages
+    function updatePaginationButtons() {
+        const prevBtn = document.getElementById('previous-page');
+        const nextBtn = document.getElementById('next-page');
+
+        prevBtn.disabled = (currentPage === 1);
+        nextBtn.disabled = (currentPage === totalPages);
+    }
+
+    document.getElementById('previous-page').addEventListener('click', function() {
+        if (currentPage > 1) {
+            fetchMovies(currentPage - 1, itemsPerPage);
+        }
+    });
+
+    document.getElementById('next-page').addEventListener('click', function() {
+        if (currentPage < totalPages) {
+            fetchMovies(currentPage + 1, itemsPerPage);
+        }
+    });
+
+    function updatePageInfo(){
+        const pageInfoElement= document.getElementById('page-info');
+        pageInfoElement.textContent = `Page ${currentPage} of ${totalPages}`;
+    }
+
+    consloe.log("currentPage:", currentPage, "totalPages:", totalPages);
 </script>
+{% endblock %}
+
+
+{% block pagination-buttons %}
+<br>
+<div class="pagination-container" style="width:100%; align-items: center; display: flex;">
+    <button id="previous-page" style="color:blue;padding:10px 20px; margin:0px auto;"><strong>&#60;</strong></button>
+    <i id="page-info"></i>
+    <button id="next-page" style="padding:10px 20px; margin:5px auto;"><strong>&#62;</strong></button>
+
+    <select id="listed-elements">
+        <option value="6">6</option>
+        <option value="9" selected="selected">9</option>
+        <option value="12">12</option>
+        <option value="24">24</option>
+    </select>
+</div>
+<br>
 {% endblock %}

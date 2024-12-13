@@ -5,6 +5,7 @@ from . import serializers
 from rest_framework.views import APIView
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+from django.core.paginator import Paginator
 import logging
 
 # Set up logging
@@ -169,9 +170,28 @@ class ContentViewset(APIView):
                 )
 
         items = models.Content.objects.all()
-        serializer = serializers.ContentSerializer(items, many=True)
+
+        #pagination
+        page = request.GET.get('page', 1)
+        page_size = request.GET.get('page_size', 9)
+        paginator = Paginator(items, page_size)
+
+        try:
+            paginated_items = paginator.page(page)
+        except Exception as e:
+            return Response(
+                {"status": "error", "message": str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        serializer = serializers.ContentSerializer(paginated_items, many=True)
         return Response(
-            {"status": "success", "data": serializer.data},
+            {"status": "success", "data": serializer.data,
+            "pagination":{
+                    "current_page": paginated_items.number,
+                    "total_pages": paginator.num_pages,
+                    "total_items": paginator.count
+                }
+            },
             status=status.HTTP_200_OK
         )
 

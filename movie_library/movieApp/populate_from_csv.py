@@ -38,7 +38,7 @@ def clean_content(row):
         "modifiedBy": 1
     }
 
-def populate_movies(limit=5):
+def populate_movies(limit=50):
     with open('content.csv', 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         count = 0
