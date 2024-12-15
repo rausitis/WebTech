@@ -90,6 +90,60 @@
         text-align: center;
         margin: 20px 0;
     }
+
+    #previous-page {
+        color: white;
+        background-color: green;
+        padding:10px 20px;
+        margin:0px auto;
+        border: 0px 0px 0px 0px;
+    }
+
+    #previous-page:hover {
+        color: white;
+        background-color: green;
+        padding:10px 20px;
+        margin:0px auto;
+        border: 0px 0px 0px 0px;
+    }
+
+    #previous-page:disabled {
+        color: black;
+        background-color: darkgrey;
+        padding:10px 20px;
+        margin:0px auto;
+        border: 0px 0px 0px 0px;
+    
+    }
+
+    #next-page {
+        color: white;
+        background-color: green;
+        padding:10px 20px;
+        margin:0px auto;
+        border: 0px 0px 0px 0px;
+    }
+
+    #next-page:hover {
+        color: white;
+        background-color: green;
+        padding:10px 20px;
+        margin:0px auto;
+        border: 0px 0px 0px 0px;
+    }
+
+    #next-page:disabled {
+        color: black;
+        background-color: darkgrey;
+        padding:10px 20px;
+        margin:0px auto;
+        border: 0px 0px 0px 0px;
+    
+    }
+
+    #listed-elements {
+        margin: 15px 15px 15px 15px;
+    }
 </style>
 {% endblock %}
 
@@ -228,7 +282,7 @@
 {% block pagination-buttons %}
 <br>
 <div class="pagination-container" style="width:100%; align-items: center; display: flex;">
-    <button id="previous-page" style="color:blue;padding:10px 20px; margin:0px auto;"><strong>&#60;</strong></button>
+    <button id="previous-page" style=""><strong>&#60;</strong></button>
     <i id="page-info"></i>
     <button id="next-page" style="padding:10px 20px; margin:5px auto;"><strong>&#62;</strong></button>
 
