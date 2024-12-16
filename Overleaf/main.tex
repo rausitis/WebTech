@@ -71,7 +71,7 @@
 
 
 \centering
-\large \ December 15, 2024
+\large \ December 16, 2024
 
 
 \vfill % Fill the rest of the page with whitespace
@@ -85,28 +85,28 @@
 
 \section{Introduction}
 
-For the Web Technologies course, our team has endeavoured to develop the Movie Library web application. The reason for this is the common interest in the movies and TV series we share, taking inspiration from the existing popular libraries, such as IMDB. The group consists of 6 people from 5 European countries, hence, we found it a niche solution to promoting different national classics if there was a movie library specifically to look for them. Our Movie Library is allowing users to explore movies by their country of origin and create an engagement with their favourite content across the international community. This way, we can embrace and share different cultures and impressions of domestic motion picture artworks on a common platform.
+For the Web Technologies course, our team has endeavoured to develop the Movie Library web application. The reason for this is the common interest in the movies and TV series we share, taking inspiration from the existing popular libraries, such as IMDB. The group consists of 6 people from 5 European countries, hence, we found it a niche solution to promoting different national classics if there was a movie library specifically to look for them. Our Movie Library is allowing users to explore movies by their country of origin and create an engagement with their favourite content across the international community. This way, we can embrace and share different cultures and impressions of domestic motion picture artworks on a common platform. \\
 
-The use flow can be seen in the Use Case in Appendix 1. Django, which is a high-level Python web framework, was utilized for the project in combination with a SQL database and template-based frontend with HTML, CSS and JavaScript. The project has an MVC (model-view-controller) design pattern.
+The use flow can be seen in the Use Case in Appendix 1. Django, which is a high-level Python web framework, was utilized for the project in combination with a SQL database and template-based frontend with HTML, CSS and JavaScript. The project has an MVC (model-view-controller) design pattern. \\
 
 This report reflects on the development of the movie library application, specifically the front-end, back-end, and database connection and, finally, the authentication and authorization capabilities. 
 
 \section{Front-End}
 
-Django already features a very complete template system that seamlessly interacts with its backend service; however, since we wanted to explore more fundamental solutions, we opted to encode all database interactions via vanilla Javascript API calls to our REST API. For the styling, we also made use of vanilla CSS, which is dynamically imported via Django's templating system. which we use to build each page.
+Django already features a very complete template system that seamlessly interacts with its backend service; however, since we wanted to explore more fundamental solutions, we opted to encode all database interactions via vanilla Javascript API calls to our REST API. For the styling, we also made use of vanilla CSS, which is dynamically imported via Django's templating system, which we use to build each page.
 
 \subsection{HTML}
 
-The HTML document structure contains 2 main parts - $<head>$ (containing page metadata and links to CSS documents) and $<body>$, which is further divided into the overall page content and a $<footer>$. \\
+The HTML document structure contains 2 main parts - \texttt{<head>} (containing page metadata and links to CSS documents) and \texttt{body}, which is further divided into the overall page content and a \texttt{footer}. \\
 
-To make the inheritance of common elements easier and to reduce code repetition, we made use of Django's built-in template system to define a base page that is subsequently extended by other pages.
+To make the inheritance of common elements easier and to reduce code repetition, we made use of Django's built-in template system to define a base page that is subsequently extended by other pages. \\
 
-The main content of each page is structured as a grid with the help of standard tags, such as $<div>$, $<a>$, $<img>$, $<h1>$, $<h2>$ and $<p>$ where the page layout and grid dimensions are defined as classes in CSS file.
+The main content of each page is structured as a grid with the help of standard tags, such as \texttt{div}, \texttt{a}, \texttt{img}, \texttt{h1}, \texttt{h2} and \texttt{p} where the page layout and grid dimensions are defined as classes in CSS file.
 
 
 \subsection{CSS}
 
-To make the CSS code easier to navigate, it is split into several .css documents grouped by different sections of the web page (menu bar, footer, slide-show banner) and different web page layouts (landing page, list by country, list of countries, movie/TV show).
+To make the CSS code easier to navigate, it is split into several .css documents grouped by different sections of the web page (menu bar, footer, slide-show banner) and different web page layouts (landing page, list by country, list of countries, movie/TV show). \\
 
 One main .css document defines the default classes used by all web pages and the base grid used for the main content of all pages, which controls the width and centring. The .css document devoted to each page layout further defines subclasses of the base grid to specify the spacing, row height and number of columns. 
 
@@ -152,20 +152,16 @@ To create a slide show of images for the landing page banner, animation properti
 }
 \end{minted}
 
-This project's first task is to build your application's front-end side.
-This section should clearly describe the technical implementation of the work put into building the front end:
+\subsection{Javascript}
 
-\begin{itemize}
-    \item Technically describe the use of HTML 5: which HTML tags do you use, where, and why
-    \item Technically describe the use of CSS: why and how you use CSS (including interesting selectors/declarations and how it is incorporated in the application)
-    \item Technically describes the use of JavaScript: why and how you use it in your application (including interesting behaviours and how they are incorporated into the application)
-\end{itemize}
+Django already features a very complete template system that seamlessly interacts with its backend service; however, since we wanted to explore more fundamental solutions, we opted for coding all database interactions via vanilla Javascript API calls to our REST API.\\
 
-\myparagraph{Resources} Lectures 1 to 3.
+In this way, not only we kept it technically simple without delving into the unnecessary overhead that comes with popular frontend solutions (React, Angular, Vue, etc.), we seem aligned with a growing tendency in the field to keep the frontend interactions as simple as possible (although we could have, for example, used Typescript for better error handling and robustness of code). 
+
 
 \section{Resource Management}
 
-The back-end of the movie library application is built using Django and REST Framework. Since the library's purpose is to allow users to search for movies, series, actors and movie makers, those are some of our main resources. Although it started with a PostgreSQL, we moved into the simpler sqlite database for development purposes. It serves as the database for storing and managing resources, and REST APIs are utilized for seamless interaction with the front end using HTTP methods. APIs were tested by Postman and were also enhanced during the semester, for instance, distinguishing between registration and login processes, which was initially overlooked. 
+The back-end of the movie library application is built using Django and REST Framework. Since the library's purpose is to allow users to search for movies, series, actors and movie makers, those are some of our main resources. Although it started with a PostgreSQL, we moved into the simpler sqlite database for development purposes. It serves as the database for storing and managing resources, and REST APIs are utilized for seamless interaction with the front end using HTTP methods. APIs were tested by Postman and were also enhanced during the semester, for instance, distinguishing between registration and login processes, which was initially overlooked. \\
 
 The resources are defined as models directly in Django and after making migrations, correspond to the respective tables in the database. That is achieved by using Django's Object-Relational Mapping which takes away the need for manual SQL queries. Each element in the model is defined with the data type and the unique name. Additionally, relationships are defined by the use of Primary and Foreign keys. The resources for the movie library are:
 
@@ -218,8 +214,7 @@ We are satisfied, however, that each member of the group has had exposure to the
 \section{Appendix}
 
 \myparagraph{Appendix 1} Use Case
-
-\\\textbf{}
+\vspace{2ex}
 
 \includegraphics[scale=0.40]{images/USE CASE WET.drawio.png}\\[0.1cm] 
 
@@ -230,15 +225,14 @@ We are satisfied, however, that each member of the group has had exposure to the
 
 \clearpage
 \myparagraph{Appendix 3} ERD Overview
+\vspace{2ex}
 
-\\\textbf{}
 
 \includegraphics[scale=0.30]{images/WebTechERDNewUpdated.drawio.png}\\[0.1cm] 
 
 \clearpage
 \myparagraph{Appendix 4} API Viewset Example
-
-\\\textbf{}
+\vspace{2ex}
 
 \includegraphics[scale=0.5]{images/WhatsApp Image 2024-12-13 at 16.01.10.jpeg}\\[0.1cm] 
 
