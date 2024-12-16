@@ -3,6 +3,7 @@ from .api_views import ContentViewset
 from .api_views import CastMembersViewset
 from .api_views import FavoriteContentViewset
 from .api_views import MovieMakersViewset
+from .api_views import RequestLoggerViewset
 from django.views.generic import TemplateView
 from .template_views import verify_view, auth_view, home_view
 
@@ -10,6 +11,9 @@ from django.urls import path
 
 
 urlpatterns = [
+    # Add this new route at the beginning of urlpatterns
+    path('requests/', RequestLoggerViewset.as_view()),
+
     # REST APIs - interacting with DB
     path('users/', UserInfoViewset.as_view()),
     path('users/<int:id>/', UserInfoViewset.as_view()),
