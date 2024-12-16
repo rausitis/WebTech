@@ -5,7 +5,12 @@
 \usepackage{booktabs}
 \usepackage{minted}
 \newcommand\tab[1][1cm]{\hspace*{#1}}
-\usepackage{graphicx} % Required for inserting images
+\usepackage[table]{xcolor}
+\usepackage{graphicx} 
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{booktabs}
 
 \newcommand{\myparagraph}[1]{\vspace{0.1cm}\noindent \textbf{\textit{#1.}}}
 
@@ -82,14 +87,19 @@
 %\tableofcontents
 %\newpage
 
-
 \section{Introduction}
 
-For the Web Technologies course, our team has endeavoured to develop the Movie Library web application. The reason for this is the common interest in the movies and TV series we share, taking inspiration from the existing popular libraries, such as IMDB. The group consists of 6 people from 5 European countries, hence, we found it a niche solution to promoting different national classics if there was a movie library specifically to look for them. Our Movie Library is allowing users to explore movies by their country of origin and create an engagement with their favourite content across the international community. This way, we can embrace and share different cultures and impressions of domestic motion picture artworks on a common platform. \\
+For the Web Technologies course, our team has endeavoured to develop the Movie Library web application. The reason for this is the common interest in the movies and TV series we share, taking inspiration from the existing popular libraries, such as IMDB. \\
+
+The group consists of 6 people from 5 European countries, hence, we found it a niche solution to promoting different national classics if there was a movie library specifically to look for them. \\ 
+
+Our Movie Library is allowing users to explore movies by their country of origin and create an engagement with their favourite content across the international community. This way, we can embrace and share different cultures and impressions of domestic motion picture artworks on a common platform. \\
 
 The use flow can be seen in the Use Case in Appendix 1. Django, which is a high-level Python web framework, was utilized for the project in combination with a SQL database and template-based frontend with HTML, CSS and JavaScript. The project has an MVC (model-view-controller) design pattern. \\
 
 This report reflects on the development of the movie library application, specifically the front-end, back-end, and database connection and, finally, the authentication and authorization capabilities. 
+
+\newpage{}
 
 \section{Front-End}
 
@@ -197,19 +207,54 @@ Overall, the resource management described above ensures efficient operations be
 
 \section{Authentication and Authorization}
 
-The Authentication and Authorization part of our project proved to be a bit more challenging than we initially thought, and is currently the only fully implemented interaction between front-end and back-end that we have implemented. In hindsight, we can tell problems arose by not understanding the unique setup we chose for this project, and the tendency to use Django as a full-stack solution instead of, in our case, something more RESTful focused. In particular, it took us some time to understand the difference between Django forms (default in full-stack quick prototyping) vs. bare Javascript solutions using our own API routes.
+The Authentication and Authorization part of our project proved to be a bit more challenging than we initially thought, and is currently the only fully implemented interaction between front-end and back-end that we have implemented. \\
 
-\section{Conclusions}
+In hindsight, we can tell problems arose by not understanding the unique setup we chose for this project, and the tendency to use Django as a full-stack solution instead of, in our case, something more RESTful focused. \\
 
-At the moment, the group is finished with this project, even though we did not commit to the vision we had at the beginning.
+In particular, it took us some time to understand the difference between Django forms (default in full-stack quick prototyping) vs. bare Javascript solutions using our own API routes. \\
 
-The separate parts that constitute the codebase (front-end, back-end and database) are properly connected, although in a suboptimal way: the deployment is not yet abstracted (via, for example, the use of containers), which makes it harder to deploy the service to the Internet for other users to connect to.
+For the Authentication and Authorization feature, we made two different web pages, one for the registration of new users and one for already existing users to sign in. \\
 
-We are satisfied, however, that each member of the group has had exposure to the different constituent parts of a modern full-stack application, having also used tools like `git` for version control and code sharing. The main difficulties of this project arose from inherent difficulties of assynchronously organising, and working on, a full-stack project. This is already a complex endeavour for software engineers, thus naturally it would constitute a far bigger problem for such a group as ours, with many diverse backgrounds other than software engineering.
+The registration page was a bit problematic since we had to figure out what kind of data we want to use for registering in our database and how to differentiate one user from another. We eventually decided to have just first name, last name, email address, password, and phone number (so we can use it for the two-factor authentication).  \\
 
-\clearpage
+We implemented only two different user types, the admin and the normal user. The normal user was given access to view the content available on the site, while the admin also had access to the Django admin page. That way, he can edit the databases, create new entries for the content, and edit the users' database if it needs to be updated. The implementation was based on accessing different websites. Unlike the regular user, who can just sign in by accessing the sign in page from the homepage, the admin user would have to access the \texttt{/admin} route to sign in. \\
 
-\vfill % Fill the rest of the page with whitespace
+Below, you can see a role table, listing all the features that the authenticated user and the admin can do while on our page:
+
+\begin{table}[h!]
+\centering
+\setlength{\arrayrulewidth}{1mm}
+\renewcommand{\arraystretch}{1.8}
+\setlength{\tabcolsep}{5pt}
+\rowcolors{2}{gray!10}{white}
+\begin{tabular}{>{\centering\arraybackslash}p{4cm}>{\centering\arraybackslash}p{1.5cm}>{\centering\arraybackslash}p{1.5cm}}
+\toprule
+\multicolumn{3}{c}{\textbf{Role Permissions}} \\
+\midrule
+\textbf{Action} & \textbf{Admin} & \textbf{User} \\
+\midrule
+View movies & \textcolor{green!70!black}{Yes} & \textcolor{green!70!black}{Yes} \\
+Create/Update/Delete movies/TV shows & \textcolor{green!70!black}{Yes} & \textcolor{red!70!black}{No} \\
+View users & \textcolor{green!70!black}{Yes} & \textcolor{red!70!black}{No} \\
+Create/Update/Delete users & \textcolor{green!70!black}{Yes} & \textcolor{red!70!black}{No} \\
+\bottomrule
+\end{tabular}
+\caption{System Role Permissions}
+\end{table}
+
+\newpage{}
+
+\section{Conclusion}
+
+At the moment, the group is finished with this project, even though we did not commit to the vision we had at the beginning. \\
+
+The separate parts that constitute the codebase (front-end, back-end and database) are properly connected, although in a suboptimal way: the deployment is not yet abstracted (via, for example, the use of containers), which makes it harder to deploy the service to the Internet for other users to connect to. \\
+
+We are satisfied, however, that each member of the group has had exposure to the different constituent parts of a modern full-stack application, having also used tools like \texttt{git} for version control and code sharing. \\
+
+The main difficulties of this project arose from inherent difficulties of assynchronously organising, and working on, a full-stack project. This is already a complex endeavour for software engineers, thus naturally it would constitute a far bigger problem for such a group as ours, with many diverse backgrounds other than software engineering. \\
+
+\newpage{}
 
 \section{Appendix}
 
