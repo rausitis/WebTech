@@ -3,8 +3,9 @@ from rest_framework.response import Response
 from . import models
 from . import serializers
 from rest_framework.views import APIView
-from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+import os
+import socket
 import logging
 
 # Set up logging
@@ -12,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 request_counter = 0
 PORT = os.environ.get('PORT', 8000)  # Default to 8000 if not specified
+
 
 class UserInfoViewset(APIView):
     def get(self, id=None):
@@ -434,12 +436,9 @@ class RequestLoggerViewset(APIView):
     def get(self, request):
         global request_counter
         request_counter += 1
-        hostname = socket.gethostname()
         response_data = {
-            "instance": f"Django instance on port {PORT}",
-            "request_number": request_counter,
-            "hostname": hostname,
-            "timestamp": "2024-12-16T10:54:13+01:00"  # Using provided time
+            "instance": f"Django instance on port {PORT}\n",
+            "request_number": request_counter
         }
         print(f"[Instance on port {PORT}] Request #{request_counter} received from {request.META.get('REMOTE_ADDR')}")
         return Response(response_data)
