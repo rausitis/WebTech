@@ -10,6 +10,8 @@ import logging
 # Set up logging
 logger = logging.getLogger(__name__)
 
+request_counter = 0
+PORT = os.environ.get('PORT', 8000)  # Default to 8000 if not specified
 
 class UserInfoViewset(APIView):
     def get(self, id=None):
@@ -426,3 +428,18 @@ class MovieMakersViewset(APIView):
         return Response(
             {"status": "success", "data": "Item Deleted"}
         )
+
+
+class RequestLoggerViewset(APIView):
+    def get(self, request):
+        global request_counter
+        request_counter += 1
+        hostname = socket.gethostname()
+        response_data = {
+            "instance": f"Django instance on port {PORT}",
+            "request_number": request_counter,
+            "hostname": hostname,
+            "timestamp": "2024-12-16T10:54:13+01:00"  # Using provided time
+        }
+        print(f"[Instance on port {PORT}] Request #{request_counter} received from {request.META.get('REMOTE_ADDR')}")
+        return Response(response_data)
