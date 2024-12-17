@@ -8,8 +8,4 @@ app_name = 'movieApp'
 urlpatterns = [
     path('', include(template_routes)),
     path('api/', include(api_routes)),
-<<<<<<< HEAD
 ]
-=======
-] 
->>>>>>> 1041b518188f6002e4d1e9f7fc24d7445090c852

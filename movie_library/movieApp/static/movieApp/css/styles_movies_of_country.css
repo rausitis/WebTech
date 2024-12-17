@@ -27,10 +27,38 @@
 	gap: 10px 0px;
 	--row_hight: 200px;
 	grid-template-columns: 200px 800px ;
-	grid-template-rows: var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight);
+	grid-template-rows: repeat(auto-fill, 200px);
+	
+	
+
 	
 	/*
-	border: 2px groove black;*/
+	border: 2px groove black;
+	.movies_container {
+	padding-top: 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+	max-width: 1200px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	
+	gap: 20px;
+}
+
+
+grid-template-rows: var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) ;
+	
+
+	gap: 10px 0px;
+	--row_hight: 200px;
+	grid-template-columns: 200px 800px ;
+	grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	grid-template-rows: var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) ;
+	grid-template-rows: var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight) var(--row_hight);
+	*/
 }
 
 
@@ -44,7 +72,6 @@
 	
 	grid-column: 2;
 	background-color: #545454;
-	
 	
 	
 	/*
@@ -129,6 +156,7 @@
 	margin-left:auto;
 	margin-right:auto;
 	background-color: black;
+	max-height: 200px;
 	
 }
 
@@ -214,3 +242,74 @@
 
 
 
+
+
+
+
+.movies_container {
+	padding-top: 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+	max-width: 1200px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 20px;
+}
+
+.country_card {
+	background: var(--card-bg, #c3c3c3);
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	padding: 15px;
+	transition: transform 0.2s;
+}
+
+.movie_card {
+	background: var(--card-bg, #fff);
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	padding: 15px;
+	transition: transform 0.2s;
+}
+
+.movie_card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.movie_meta {
+	color: #5e5d5d;
+	margin: 10px 0;
+	font-size: 0.9em;
+}
+
+.mature_content {
+	background: #d32f2f;
+	color: white;
+	padding: 2px 6px;
+	border-radius: 4px;
+	font-size: 0.8em;
+	margin-left: 5px;
+}
+
+.description {
+	font-size: 0.9em;
+	line-height: 1.4;
+	color: var(--text-color, #333);
+}
+
+.loading {
+	text-align: center;
+	padding: 50px;
+	grid-column: 1 / -1;
+	color: var(--text-color, #666);
+}
+
+.error-message {
+	text-align: center;
+	padding: 50px;
+	grid-column: 1 / -1;
+	color: #d32f2f;
+}

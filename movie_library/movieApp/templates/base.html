@@ -21,18 +21,25 @@
             <img style="width:50px" src="{% static 'movieApp/images/Logo.png' %}">
         </a>	
         <a onclick="openNav()">Menu</a>
-        <a class="right-align" style="font-weight: bold;" href="{% url 'movieApp:sign_in' %}">Sign In</a>
-        <a class="right-align" href="{% url 'movieApp:register' %}">Register</a>
         <input type="text" placeholder="Search..">
+        <div class="nav-links">
+            {% if user.is_authenticated %}
+                <span class="right-align">Welcome, {{ user.first_name|default:user.email }}</span>
+                <a class="right-align" href="#" onclick="handleLogout(event)">Sign Out</a>
+            {% else %}
+                <a class="right-align" style="font-weight: bold;" href="{% url 'movieApp:sign_in' %}">Sign In</a>
+                <a class="right-align" href="{% url 'movieApp:register' %}">Register</a>
+            {% endif %}
+        </div>
     </div>
 
     <!--********* Side Menu *********-->
     <div id="SideMenu" class="sidemenu">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="{% url 'movieApp:movies_by_country' %}">Movies</a>
-        <a href="{% url 'movieApp:tv_shows' %}">TV Shows</a>
-        <a href="{% url 'movieApp:cast_and_crew' %}">Cast & Crew</a>
-        <a href="{% url 'movieApp:community' %}">Community</a>
+        <a href="{% url 'movieApp:tv_shows_by_country' %}">TV Shows</a>
+        <!-- <a href="{% url 'movieApp:cast_and_crew' %}">Cast & Crew</a>
+        <a href="{% url 'movieApp:community' %}">Community</a> -->
         <a href="{% url 'movieApp:about' %}">About</a>
     </div>
 
@@ -71,6 +78,7 @@
         </div>
     </footer>
 
+    {% csrf_token %}
     <script>
         function openNav() {
             document.getElementById("SideMenu").style.width = "250px";
@@ -78,6 +86,32 @@
 
         function closeNav() {
             document.getElementById("SideMenu").style.width = "0";
+        }
+
+        function handleLogout(event) {
+            event.preventDefault();
+            
+            fetch("/api/users/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value
+                },
+                body: JSON.stringify({
+                    logout: true
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = "/";
+                } else {
+                    console.error("Logout failed");
+                }
+            })
+            .catch(error => {
+                console.error("Logout error:", error);
+            });
         }
     </script>
     {% block extra_js %}{% endblock %}

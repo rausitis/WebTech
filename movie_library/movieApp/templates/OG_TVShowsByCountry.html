@@ -1,59 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "base.html" %}
+{% load static %}
 
-	<meta name="description" content="Comunity for movie lovers">
-	<meta name="keywords" content="Film, Movie, TV, TV-Show, Actor, Director, Comunity, Discussion, New in Theaters">
-	<meta name="author" content="Group 15">
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'movieApp/css/styles_movies_by_country.css' %}">
+{% endblock %}
 
-	<link rel="stylesheet" href="../styles/styles.css">
-	<link rel="stylesheet" href="../styles/styles_menu_bar.css">
-	<link rel="stylesheet" href="../styles/styles_footer.css">
-	<link rel="stylesheet" href="../styles/styles_registration_page.css">
-	<link rel="stylesheet" href="../styles/styles_movies_by_country.css">
-
-	
-
-</head>
-<body>
-
-<!--********* TOP BAR *********-->
-<div class="topbar">
-  <a class="active"  href="LandingPage.html"><img style="width:50px" src="../images/Logo.png"></a>	
-  <a onclick="openNav()">Menu</a>
-  <a class="right-align" style = "font-weight: bold;" href="SignIn.html">Sign In</a>
-  <a class="right-align" href="Register.html">Register</a>
-  <input type="text" placeholder="Search..">
-</div>
-
-
-<!--********* Side Menu *********-->
-<div id="SideMenu" class="sidemenu">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="MoviesByCountry.html">Movies</a>
-  <a href="TVShowsByCountry.html">TV Shows</a>
-  <a href="CastAndCrewByCountry.html">Cast & Crew</a>
-  <a href="Community.html">Community</a>
-  <a href="About.html">About</a>
-</div>
-
-<script>
-	function openNav() {
-	  document.getElementById("SideMenu").style.width = "250px";
-	}
-
-	function closeNav() {
-	  document.getElementById("SideMenu").style.width = "0";
-	}
-</script>
-
-
-
-
-
-
-
+{% block content %}
 
  
  <!--*****************************************************-->
@@ -70,7 +22,7 @@
 				<img src="../images/AboutPageBanner/Pans_labyrinth.jpg">
 				<img src="../images/AboutPageBanner/La-la-Land.jpg">
 				<img src="../images/AboutPageBanner/Avatar_2.jpg">
-				<div class="text" style="margin-top:50px">Movies by country</div>
+				<div class="text" style="margin-top:50px">TV Shows by country</div>
 			<!--
 			-->
 			</div>
@@ -83,69 +35,68 @@
  <!--***************** Page content *****************-->
 <div class="page_container mbc_page_container"> 
 	
-	<!--********* Movies by country *********-->
+	<!--********* TV Shows by country *********-->
 	<!--********* Country 1 *********-->
 	<!--********* Title *********-->
 	<div class="page_item mbc_page_item title_item">
-		<a href="MoviesOfCountry.html">
+		<a href="TVShowsOfCountry.html">
 			<h1>Country1</h1>	
 		</a>
 	</div>
 	<!--********* Photos *********-->
-		<!--********* Photos *********-->
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie1/SlideShow/img1.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie1/SlideShow/img2.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie1/SlideShow/img3.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie1/SlideShow/img4.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
@@ -161,57 +112,57 @@
 	<!--********* Photos *********-->
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie1/SlideShow/img5.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie1/SlideShow/img6.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie1/SlideShow/img7.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie1/SlideShow/img8.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
@@ -226,62 +177,63 @@
 	<!--********* Photos *********-->
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie1/SlideShow/img9.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie1/SlideShow/img10.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie33/SlideShow/img1.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie33/SlideShow/img2.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	
 	<!--********* Country 4 *********-->
+	<!--********* Title *********-->
 	<!--********* Title *********-->
 	<div class="page_item mbc_page_item title_item">
 		<a href="TVShowsOfCountry.html">
@@ -291,57 +243,57 @@
 	<!--********* Photos *********-->
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie33/SlideShow/img3.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie36/SlideShow/img1.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie36/SlideShow/img2.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie36/SlideShow/img3.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
@@ -356,57 +308,57 @@
 	<!--********* Photos *********-->
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie41/SlideShow/img1.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie41/SlideShow/img2.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie41/SlideShow/img3.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie33/SlideShow/img1.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
@@ -421,60 +373,61 @@
 	<!--********* Photos *********-->
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie1/SlideShow/img1.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie1/SlideShow/img2.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie1/SlideShow/img3.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
 	<div class="page_item mbc_page_item photo_item ">
 		<div  class="photo_item_img_frame">
-			<a href="Movie.html">
+			<a href="TVShow.html">
 				<img src="../images/Movies/Movie1/SlideShow/img4.jpg">
 				<div class="overlay">
 				</div>	
 			</a>
 		</div>
 		<div  class="photo_item_name_frame">
-			<a href="Movie.html">
-				<h1>Movie Name</h1>			
+			<a href="TVShow.html">
+				<h1>TV Show Name</h1>			
 			</a>
 		</div>
 	</div>
+	
 
 	
 
@@ -485,60 +438,91 @@
 
 </div>
 <!--***************** Page content end *****************-->
+{% endblock %}
 
-<!--********* Footer *********-->
-<footer class="footer">
-	<div>
-		<h1><b>Social media</b></h1>
-		<p>
-		<a href="https://discord.com/">Discord</a><br>
-		<a href="https://www.instagram.com/">Instagram</a><br>
-		<a href="https://www.facebook.com/homeofmovies29/">Facebook</a><br>
-		<a href="https://www.reddit.com/?rdt=34230">Redit</a><br>
-		</p>
-	</div>
-	<div>
-		<h1><b>Authors</b></h1>
-		<p> 
-			Stanislaw Krzysztof Graczykowski<br>
-			Paul-Constantin Axinte<br>
-			Krzysztof Sekulski<br>
-			Eugénia Ficková<br>
-			Alexandre Jorge Duarte Marques Pinto<br>
-			Ruta Miglava
-		</p>
-	</div>
-	<div>
-		<h1><b>Contact Us</b></h1>
-		<p> 
-			email@email.com<br>
-			SDU<br>
-			Sonderborg<br>
-			Denmark
-		</p>
-	</div>
-</footer>
 
- 
- 
- 
- 
- 
- 
- 
- <!--****************************************************-->
- 
- 
 
- 
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchMovies('portugal','moviesGridPT');
+        fetchMovies('latvia','moviesGridLV');
+        fetchMovies('slovakia, czechoslovakia','moviesGridSK');
+        fetchMovies('romania','moviesGridRO');
+        fetchMovies('poland','moviesGridPL');
+        
+    });
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+    function fetchMovies(cntry, gridID) {
+        fetch('/api/content/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const movies = data.data.filter(item => item.type.toLowerCase() === 'movie' & item.country.toLowerCase() === cntry );
+                    const filtered = movies.slice(0, 3);
+					displayMovies(filtered, gridID);
+                } else {
+                    throw new Error('Failed to fetch movies');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById(gridID).innerHTML = `
+                    <div class="error-message">
+                        <h2>Oops!</h2>
+                        <p>We couldn't load the movies. Please try again later.</p>
+                    </div>
+                `;
+            });
+    }
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+    function displayMovies(movies, gridID) {
+        const container = document.getElementById(gridID);
+        
+        if (movies.length === 0) {
+            container.innerHTML = `
+                <div class="error-message">
+                    <h2>No movies found</h2>
+                    <p>Check back later for our latest additions!</p>
+                </div>
+            `;
+            return;
+        }
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+        container.innerHTML = movies.map(movie => `
+            <div class="movie_card" onclick="window.location.href='/movie/${movie.id}'">
+                <h2>${escapeHtml(movie.title)}</h2>
+                <div class="movie_meta">
+                    <span>${movie.year}</span> • 
+                    <span>${escapeHtml(movie.genre)}</span>
+                    ${movie.matureContent ? '<span class="mature_content">15+</span>' : ''}
+                </div>
+                <div class="movie_meta">
+                    <span>${escapeHtml(movie.country)}</span>
+                </div>
+                <p class="description">${escapeHtml(movie.description).substring(0, 150)}...</p>
+                <div class="movie_meta">Duration: ${formatDuration(movie.duration)}</div>
+            </div>
+        `).join('');
+    }
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+    function formatDuration(duration) {
+        try {
+            const hours = duration.match(/(\d+)H/)?.[1] || 0;
+            const minutes = duration.match(/(\d+)M/)?.[1] || 0;
+            return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+        } catch (e) {
+            return duration;
+        }
+    }
 
-</body>
-</html>
+    function escapeHtml(unsafe) {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+</script>
+{% endblock %}

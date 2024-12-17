@@ -1,0 +1,24 @@
+2024-11-12 18:24:11.258 CET [426753] LOG:  starting PostgreSQL 16.3 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 14.2.1 20240805, 64-bit
+2024-11-12 18:24:11.259 CET [426753] LOG:  listening on IPv6 address "::1", port 5432
+2024-11-12 18:24:11.259 CET [426753] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-11-12 18:24:11.260 CET [426753] FATAL:  could not create lock file "/run/postgresql/.s.PGSQL.5432.lock": No such file or directory
+2024-11-12 18:24:11.262 CET [426753] LOG:  database system is shut down
+2024-11-12 18:24:13.653 CET [426776] LOG:  starting PostgreSQL 16.3 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 14.2.1 20240805, 64-bit
+2024-11-12 18:24:13.654 CET [426776] LOG:  listening on IPv6 address "::1", port 5432
+2024-11-12 18:24:13.654 CET [426776] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-11-12 18:24:13.655 CET [426776] FATAL:  could not create lock file "/run/postgresql/.s.PGSQL.5432.lock": No such file or directory
+2024-11-12 18:24:13.657 CET [426776] LOG:  database system is shut down
+2024-11-12 18:25:04.342 CET [427065] LOG:  starting PostgreSQL 16.3 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 14.2.1 20240805, 64-bit
+2024-11-12 18:25:04.343 CET [427065] LOG:  listening on IPv6 address "::1", port 5432
+2024-11-12 18:25:04.343 CET [427065] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-11-12 18:25:04.344 CET [427065] LOG:  listening on Unix socket "/run/postgresql/.s.PGSQL.5432"
+2024-11-12 18:25:04.349 CET [427068] LOG:  database system was shut down at 2024-11-12 18:23:27 CET
+2024-11-12 18:25:04.354 CET [427065] LOG:  database system is ready to accept connections
+2024-11-12 18:25:19.318 CET [427151] FATAL:  database "movieLibrary" does not exist
+2024-11-12 18:26:40.753 CET [427590] FATAL:  database "movieLibrary" does not exist
+2024-11-12 18:27:05.002 CET [427679] FATAL:  role "apinto" does not exist
+2024-11-12 18:27:05.010 CET [427680] FATAL:  role "apinto" does not exist
+2024-11-12 18:27:07.186 CET [427705] FATAL:  role "apinto" does not exist
+2024-11-12 18:27:07.191 CET [427706] FATAL:  role "apinto" does not exist
+2024-11-12 18:30:04.452 CET [427066] LOG:  checkpoint starting: time
+2024-11-12 18:30:08.952 CET [427066] LOG:  checkpoint complete: wrote 47 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.473 s, sync=0.009 s, total=4.503 s; sync files=11, longest=0.008 s, average=0.001 s; distance=280 kB, estimate=280 kB; lsn=0/1581138, redo lsn=0/1581100

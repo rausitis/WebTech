@@ -1,60 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "base.html" %}
+{% load static %}
 
-	<meta name="description" content="Comunity for movie lovers">
-	<meta name="keywords" content="Film, Movie, TV, TV-Show, Actor, Director, Comunity, Discussion, New in Theaters">
-	<meta name="author" content="Group 15">
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'movieApp/css/styles_movies_of_country.css' %}">
+{% endblock %}
 
-	<link rel="stylesheet" href="../styles/styles.css">
-	<link rel="stylesheet" href="../styles/styles_menu_bar.css">
-	<link rel="stylesheet" href="../styles/styles_footer.css">
-	<link rel="stylesheet" href="../styles/styles_registration_page.css">
-	<link rel="stylesheet" href="../styles/styles_movies_of_country.css">
-
-	
-
-</head>
-<body>
-
-<!--********* TOP BAR *********-->
-<div class="topbar">
-  <a class="active"  href="LandingPage.html"><img style="width:50px" src="../images/Logo.png"></a>	
-  <a onclick="openNav()">Menu</a>
-  <a class="right-align" style = "font-weight: bold;" href="SignIn.html">Sign In</a>
-  <a class="right-align" href="Register.html">Register</a>
-  <input type="text" placeholder="Search..">
-</div>
-
-
-<!--********* Side Menu *********-->
-<div id="SideMenu" class="sidemenu">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="MoviesByCountry.html">Movies</a>
-  <a href="TVShowsByCountry.html">TV Shows</a>
-  <a href="CastAndCrewByCountry.html">Cast & Crew</a>
-  <a href="Community.html">Community</a>
-  <a href="About.html">About</a>
-</div>
-
-<script>
-	function openNav() {
-	  document.getElementById("SideMenu").style.width = "250px";
-	}
-
-	function closeNav() {
-	  document.getElementById("SideMenu").style.width = "0";
-	}
-</script>
-
-
-
-
-
-
-
-
+{% block content %}
  
  <!--*****************************************************-->
  <div class="aboutpage_page_container">
@@ -62,15 +13,15 @@
 	<div class="page_item aboutpage_item">
 		<div class="aboutpage">
 			<div class="banner">
-				<img src="../images/AboutPageBanner/Italian_Claasic.jpg">
-				<img src="../images/AboutPageBanner/Pans_labyrinth_2.jpg">
-				<img src="../images/AboutPageBanner/Schindlers-List-Typing.jpg">
-				<img src="../images/AboutPageBanner/Matrix3.jpg">
-				<img src="../images/AboutPageBanner/Schindlers_List.jpg">
-				<img src="../images/AboutPageBanner/Pans_labyrinth.jpg">
-				<img src="../images/AboutPageBanner/La-la-Land.jpg">
-				<img src="../images/AboutPageBanner/Avatar_2.jpg">
-				<div class="text" style="margin-top:50px">Italian TV Shows</div>
+				<img src="{% static 'movieApp/images/AboutPageBanner/Avatar_2.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/La-la-Land.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Pans_labyrinth.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Schindlers_List.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Matrix3.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Schindlers-List-Typing.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Pans_labyrinth_2.jpg' %}">
+				<img src="{% static 'movieApp/images/AboutPageBanner/Italian_Claasic.jpg' %}">
+				<div class="text" style="margin-top:50px" id="textid">Movies by country</div>
 			<!--
 			-->
 			</div>
@@ -78,257 +29,131 @@
 	</div>
 </div>
  
- 
-
- <!--***************** Page content *****************-->
-<div class="page_container cntry_page_container"> 
-	
-<!--********* Movies of a country *********-->
-
-<!--********* Movie 1 *********-->
-	<!--********* Photo *********-->
-	<div class="page_item cntry_page_item photo_item">
-		<a href="TVShow.html">
-			<div>
-				<img src="../images/Movies/Movie1/SlideShow/img2.jpg">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-	</div>
-	<!--********* Text *********-->
-	<div class="page_item cntry_page_item text_item">
-		<a href="TVShow.html">
-			<h1>TV Show name</h1>
-		</a>
-		<ul>
-			<h2> Year:</h2>
-			<p>1990</p>
-			<h2> Duration:</h2>
-			<p>2h 00m</p>
-			<h2> Age advisory:</h2>
-			<p>10+</p>
-			<h2> Rating:</h2>
-			<p>8.5</p>
-			<h2> Genre:</h2>
-			<p>Drama</p>
-			
-		</ul>
-	</div>
-
-<!--********* Movie 2 *********-->
-	<!--********* Photo *********-->
-	<div class="page_item cntry_page_item photo_item photo_item_style">
-		<a href="TVShow.html">
-			<div>
-				<img src="../images/Movies/Movie1/SlideShow/img3.jpg">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-	</div>
-	<!--********* Text *********-->
-	<div class="page_item cntry_page_item text_item">
-		<a href="TVShow.html">
-			<h1>TV Show name</h1>
-		</a>
-		<ul>
-			<h2> Year:</h2>
-			<p>1990</p>
-			<h2> Duration:</h2>
-			<p>2h 00m</p>
-			<h2> Age advisory:</h2>
-			<p>10+</p>
-			<h2> Rating:</h2>
-			<p>8.5</p>
-			<h2> Genre:</h2>
-			<p>Drama</p>
-			
-		</ul>
-	</div>
-	
-<!--********* Movie 3 *********-->
-	<!--********* Photo *********-->
-	<div class="page_item cntry_page_item photo_item photo_item_style">
-		<a href="TVShow.html">
-			<div>
-				<img src="../images/Movies/Movie1/SlideShow/img4.jpg">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-	</div>
-	<!--********* Text *********-->
-	<div class="page_item cntry_page_item text_item">
-		<a href="TVShow.html">
-			<h1>TV Show name</h1>
-		</a>
-		<ul>
-			<h2> Year:</h2>
-			<p>1990</p>
-			<h2> Duration:</h2>
-			<p>2h 00m</p>
-			<h2> Age advisory:</h2>
-			<p>10+</p>
-			<h2> Rating:</h2>
-			<p>8.5</p>
-			<h2> Genre:</h2>
-			<p>Drama</p>
-			
-		</ul>
-	</div>
-	
-<!--********* Movie 4 *********-->
-	<!--********* Photo *********-->
-	<div class="page_item cntry_page_item photo_item photo_item_style">
-		<a href="TVShow.html">
-			<div>
-				<img src="../images/Movies/Movie1/SlideShow/img5.jpg">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-	</div>
-	<!--********* Text *********-->
-	<div class="page_item cntry_page_item text_item">
-		<a href="TVShow.html">
-			<h1>TV Show name</h1>
-		</a>
-		<ul>
-			<h2> Year:</h2>
-			<p>1990</p>
-			<h2> Duration:</h2>
-			<p>2h 00m</p>
-			<h2> Age advisory:</h2>
-			<p>10+</p>
-			<h2> Rating:</h2>
-			<p>8.5</p>
-			<h2> Genre:</h2>
-			<p>Drama</p>
-			
-		</ul>
-	</div>
-	
-<!--********* Movie 5 *********-->
-	<!--********* Photo *********-->
-	<div class="page_item cntry_page_item photo_item photo_item_style">
-		<a href="TVShow.html">
-			<div>
-				<img src="../images/Movies/Movie1/SlideShow/img6.jpg">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-	</div>
-	<!--********* Text *********-->
-	<div class="page_item cntry_page_item text_item">
-		<a href="TVShow.html">
-			<h1>TV Show name</h1>
-		</a>
-		<ul>
-			<h2> Year:</h2>
-			<p>1990</p>
-			<h2> Duration:</h2>
-			<p>2h 00m</p>
-			<h2> Age advisory:</h2>
-			<p>10+</p>
-			<h2> Rating:</h2>
-			<p>8.5</p>
-			<h2> Genre:</h2>
-			<p>Drama</p>
-			
-		</ul>
-	</div>
-	
-<!--********* Movie 6 *********-->
-	<!--********* Photo *********-->
-	<div class="page_item cntry_page_item photo_item photo_item_style">
-		<a href="TVShow.html">
-			<div>
-				<img src="../images/Movies/Movie1/SlideShow/img7.jpg">
-				<div class="overlay">
-				</div>
-			</div>			
-		</a>
-	</div>
-	<!--********* Text *********-->
-	<div class="page_item cntry_page_item text_item">
-		<a href="TVShow.html">
-			<h1>TV Show name</h1>
-		</a>
-		<ul>
-			<h2> Year:</h2>
-			<p>1990</p>
-			<h2> Duration:</h2>
-			<p>2h 00m</p>
-			<h2> Age advisory:</h2>
-			<p>10+</p>
-			<h2> Rating:</h2>
-			<p>8.5</p>
-			<h2> Genre:</h2>
-			<p>Drama</p>
-			
-		</ul>
-	</div>
-	
 
 
+  <!--***************** Page content *****************-->
+<div class="page_container cntry_page_container"id="movieItem"> 
+	<div class="loading" >Loading movie details...</div>
 </div>
 <!--***************** Page content end *****************-->
+{% endblock %}
 
-<!--********* Footer *********-->
-<footer class="footer">
-	<div>
-		<h1><b>Social media</b></h1>
-		<p>
-		<a href="https://discord.com/">Discord</a><br>
-		<a href="https://www.instagram.com/">Instagram</a><br>
-		<a href="https://www.facebook.com/homeofmovies29/">Facebook</a><br>
-		<a href="https://www.reddit.com/?rdt=34230">Redit</a><br>
-		</p>
-	</div>
-	<div>
-		<h1><b>Authors</b></h1>
-		<p> 
-			Stanislaw Krzysztof Graczykowski<br>
-			Paul-Constantin Axinte<br>
-			Krzysztof Sekulski<br>
-			Eugénia Ficková<br>
-			Alexandre Jorge Duarte Marques Pinto<br>
-			Ruta Miglava
-		</p>
-	</div>
-	<div>
-		<h1><b>Contact Us</b></h1>
-		<p> 
-			email@email.com<br>
-			SDU<br>
-			Sonderborg<br>
-			Denmark
-		</p>
-	</div>
-</footer>
 
- 
- 
- 
- 
- 
- 
- 
- <!--****************************************************-->
- 
- 
 
- 
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+		
+		document.getElementById("textid").innerHTML = 'random';
+		const myid = {{ cntry_id }};
+		
+		if (myid==1) {
+			document.getElementById("textid").innerHTML = "Slovakian TV series";
+			const cntryId = 'slovakia, czechoslovakia';
+			fetchMovies(cntryId,'movieItem');
+		} else if (myid==2) {
+			document.getElementById("textid").innerHTML = "Latvian TV series";
+			const cntryId = 'latvia';
+			fetchMovies(cntryId,'movieItem');
+		} else if (myid==3) {
+			document.getElementById("textid").innerHTML = "Portuguese TV series";
+			const cntryId = 'portugal';
+			fetchMovies(cntryId,'movieItem');
+		} else if (myid==4) {
+			document.getElementById("textid").innerHTML = "Romanian TV series";
+			const cntryId = 'romania';
+			fetchMovies(cntryId,'movieItem');
+		} else if (myid==5) {
+			document.getElementById("textid").innerHTML = "Polish TV series";
+			const cntryId = 'poland';
+			fetchMovies(cntryId,'movieItem');
+		} else {
+			fetchMovies('nope','movieItem');
+		//  block of code to be executed if the condition1 is false and condition2 is false
+		}
+    });
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+    function fetchMovies(cntry, gridID) {
+        fetch('/api/content/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const movies = data.data.filter(item => item.type.toLowerCase() === 'tv series' & item.country.toLowerCase() === cntry );
+                    //const filtered = movies.slice(0, 3);
+					displayMovies(movies, gridID);
+                } else {
+                    throw new Error('Failed to fetch TV series');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById(gridID).innerHTML = `
+                    <div class="error-message">
+                        <h2>Oops!</h2>
+                        <p>We couldn't load the TV series. Please try again later.</p>
+                    </div>
+                `;
+            });
+    }
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+    function displayMovies(movies, gridID) {
+        const container = document.getElementById(gridID);
+        
+        if (movies.length === 0) {
+            container.innerHTML = `
+                <div class="error-message">
+                    <h2>No TV series found</h2>
+                    <p>Check back later for our latest additions!</p>
+                </div>
+            `;
+            return;
+        }
+		container.innerHTML = movies.map(movie => `
+			<div class="page_item cntry_page_item photo_item">
+				<a onclick="window.location.href='/movie/${movie.id}'">
+					<div class="photo_item_frame">
+						<img src="{% static 'movieApp/images/Movies/Generic/Generic.jpg' %}">
+						<div class="overlay">
+						</div>
+					</div>			
+				</a>
+			</div>
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+            <div class="page_item cntry_page_item text_item" onclick="window.location.href='/movie/${movie.id}'">
+                <h1>${(movie.title)}</h1>
+				<ul>
+				<h2> Year:</h2>
+				<p>${movie.year}</p>
+				<h2> Duration:</h2>
+				<p>${formatDuration(movie.duration)}</p>
+				<h2> Age advisory:</h2>
+				<p>${movie.matureContent ? '<span class="mature_content">15+</span>' : ''}</p>
+				<h2> Rating:</h2>
+				<p>8.5</p>
+				<h2> Genre:</h2>
+				<p>${escapeHtml(movie.genre)}</p>
+				</ul>
+			</div>
+        `).join('');
+    }
 
-<br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+    function formatDuration(duration) {
+        try {
+            const hours = duration.match(/(\d+)H/)?.[1] || 0;
+            const minutes = duration.match(/(\d+)M/)?.[1] || 0;
+            return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+        } catch (e) {
+            return duration;
+        }
+    }
 
-</body>
-</html>
+    function escapeHtml(unsafe) {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+</script>
+{% endblock %}

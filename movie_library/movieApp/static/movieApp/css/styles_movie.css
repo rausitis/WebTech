@@ -25,25 +25,42 @@
 
 /*********** Page grid dimensions ***********/
 
+.movie_page_containerX {
+	margin-top: 65px;
+	gap: 10px 8px;
+	--title_hight: 100px;
+	--photo_hight: 320px;
+	--info_hight: 300px;
+	--cast_hight: 600px;
+	grid-template-columns: 160px 160px 160px 160px 160px 160px ;
+	grid-template-rows: var(--title_hight) var(--photo_hight) var(--title_hight) var(--cast_hight) ;
+	/*
+	border: 2px groove black;*/
+}
+
 .movie_page_container {
 	margin-top: 65px;
 	gap: 10px 8px;
 	--title_hight: 100px;
 	--photo_hight: 320px;
-	--info_hight: 210px;
+	--info_hight: 300px;
 	--cast_hight: 600px;
 	grid-template-columns: 160px 160px 160px 160px 160px 160px ;
-	grid-template-rows: var(--title_hight) var(--photo_hight) var(--info_hight) var(--cast_hight) ;
+	grid-template-rows: var(--title_hight) var(--photo_hight) var(--info_hight) ;
+    
 	/*
-	border: 2px groove black;*/
-}
+	border: 2px groove black;
+    */
+    }
+
+
 
 
 
 /*********** Page grid cell sizing and layout ***********/
 
 .movie_page_item {
-/* border: 2px groove black;*/
+	border: 0px groove black;
 }
 
 .title_item {
@@ -66,6 +83,7 @@
 	grid-column: 1 / span 6;
 	grid-row: 3;
 	background-color: #545454;
+	padding: 10px;
 }
 
 .member_item1 {
@@ -219,7 +237,7 @@
 	text-align: left;
 	margin-top:10px;
 	margin-bottom:10px;
-	margin-left:20px;
+	margin-left:0px;
 	padding: 0px;
 	
   /*
@@ -242,8 +260,20 @@
 
 .info_item p {
 	margin-left:0px;
-	margin-right:60px;
-	font-size: 15px;
+	margin-right:19px;
+	font-size: 13px;
+	color: #EBEBEB;
+	display: inline;
+  /*
+  vertical-align: middle;
+  font-weight:bold;
+  */
+}
+.desc {
+	margin-left:0px;
+	margin-right:4px;
+	padding: 0px;
+	font-size: 13px;
 	color: #EBEBEB;
 	display: inline;
   /*
@@ -382,3 +412,36 @@
 
 
 
+
+
+
+
+.movie_page_containerZ {
+	padding: 10px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 485px);
+	gap: 10px;
+}
+
+.member_containerX {
+	margin-top: 0px;
+	display: grid;
+	margin-left:auto;
+	margin-right:auto;
+	gap: 10px 0px;
+	--row_height: 130px;
+	height: 130px;
+	grid-template-columns: 30% 70% ;
+	background-color: none;
+	z-index: 1;
+	/*
+	border: 2px groove black;*/
+}
+
+
+.member_item {
+	padding: 0px;
+	border: 2px groove black;
+
+}

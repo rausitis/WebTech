@@ -23,6 +23,7 @@ def parse_duration(duration_str):
 # there are still some default values that should be signaled...
 def clean_content(row):
     return {
+        "nr": int(row['nr']) if row['nr'] else 0,
         "title": row['title'],
         "description": row['description'],
         "matureContent": row['matureContent (15+)'] == '1',
@@ -38,21 +39,24 @@ def clean_content(row):
         "modifiedBy": 1
     }
 
-def populate_movies(limit=5):
-    with open('content.csv', 'r', encoding='utf-8') as file:
+
+
+def populate_movies(limit=57):
+    with open('c:\Clone\main\WebTech\movie_library\content.csv', 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         count = 0
         
         for row in reader:
             if count >= limit:
                 break
+
                 
-            if row['type'].lower() != 'movie':
-                continue
+            #if row['type'].lower() != 'movie':
+            #    continue
                 
             data = clean_content(row)
             
-            response = requests.post(f"http://localhost:7555/api/content/", json=data)
+            response = requests.post(f"http://localhost:8000/api/content/", json=data)
             
             if response.status_code == 201:
                 print(f"Successfully added: {data['title']}")

@@ -1,16 +1,21 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'movieApp/css/styles_movie.css' %}">
+{% block content %}
+<div class="page_container movie_page_container" id="movieContent"> 
+        <div class="loading">Loading movie details...</div>
+</div>
+
+
+<div class="page_container movie_page_containerZ" id="castContent" > 
+            <div class="loading" >Loading cast details...</div>
+</div>
+
 {% endblock %}
 
-{% block content %}
-<div class="page_container movie_page_container"> 
-    <div id="movieContent">
-        <div class="loading">Loading movie details...</div>
-    </div>
-</div>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'movieApp/css/styles_movie.css' %}">
+
 {% endblock %}
 
 {% block extra_js %}
@@ -18,6 +23,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const movieId = {{ movie_id }};
     fetchMovieDetails(movieId);
+    
+
 });
 
 function fetchMovieDetails(movieId) {
@@ -31,6 +38,11 @@ function fetchMovieDetails(movieId) {
         .then(data => {
             if (data.status === 'success') {
                 displayMovieDetails(data.data);
+                const movie_Nr = data.data.nr;
+                //document.getElementById('textID').innerHTML = movie_Nr;
+                //document.getElementById('textID').innerHTML = 'text';
+                fetchCastDetails(movie_Nr);
+                fetchDirectorDetails(movie_Nr);
             } else {
                 throw new Error(data.message || 'Failed to load movie');
             }
@@ -47,9 +59,108 @@ function fetchMovieDetails(movieId) {
         });
 }
 
+function fetchCastDetails(movieNr) {
+        fetch('/api/castmembers/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const cast = data.data.filter(item => item.contentNr === movieNr);
+                    const filtered = cast.slice(0, 2);
+
+                    displayCastDetails(cast);
+
+                    const stars = cast.filter(item => item.movieStar === true);
+                    const starsfiltered = stars.slice(0, 1);
+
+                    document.getElementById('actorID').innerHTML = stars.map(star => `
+                    <h2>${escapeHtml(star.firstname)} ${escapeHtml(star.lastname)}</h2>
+                    `).join(', ');;
+
+                } else {
+                    throw new Error('Failed to fetch castmembers');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById(castContent).innerHTML = `
+                    <div class="error-message">
+                        <h2>Oops!</h2>
+                        <p>We couldn't load the castmemebers. Please try again later.</p>
+                    </div>
+                `;
+            });
+    }
+
+    function fetchDirectorDetails(movieNr) {
+        fetch('/api/moviemakers/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const mmakers = data.data.filter(item => item.contentNr === movieNr);
+                    const filtered = mmakers.slice(0, 1);
+
+                    document.getElementById('directorID').innerHTML = filtered.map(director => `
+                    <h2>${escapeHtml(director.firstname)} ${escapeHtml(director.lastname)}</h2>
+                    `).join(', ');;
+
+                } else {
+                    throw new Error('Failed to fetch castmembers');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById(castContent).innerHTML = `
+                    <div class="error-message">
+                        <h2>Oops!</h2>
+                        <p>We couldn't load the castmemebers. Please try again later.</p>
+                    </div>
+                `;
+            });
+    }
+
+    function displayCastDetails(movie) {
+        const container = document.getElementById('castContent');
+        
+        if (movie.length === 0) {
+            container.innerHTML = `
+                <div class="error-message">
+                    <h2>No movies found</h2>
+                    <p>Check back later for our latest additions!</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = movie.map(cast => `
+        <!--********* Cast Members *********-->
+        <div class="page_item movie_page_item member_item" >
+            <div class="member_containerX" >
+                <div class=" member_photo_item">
+                    <div>
+                        <a> 
+                            <img src="{% static 'movieApp/images/CastAndCrew/Generic/Generic.jpg' %}" alt="Scene 1">
+                        </a>
+                        <div class="overlay"></div>		
+                    </div>
+                </div>
+                <div class=" member_info_item">
+                    <a >
+                        <h1>${escapeHtml(cast.firstname)} ${escapeHtml(cast.lastname)}</h1>
+                        <p>${escapeHtml(cast.character)}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+            
+        
+       
+        `).join('');
+    }
+
+
 function displayMovieDetails(movie) {
     const content = document.getElementById('movieContent');
-    
+
     content.innerHTML = `
         <!--********* Title *********-->
         <div class="page_item movie_page_item title_item">
@@ -59,7 +170,7 @@ function displayMovieDetails(movie) {
         <!--********* Poster *********-->
         <div class="page_item movie_page_item poster_item">
             <a href="#">
-                <img src="${movie.poster || '{% static "movieApp/images/placeholder.jpg" %}'}" 
+                <img src="${movie.poster || '{% static "movieApp/images/Movies/Generic/Poster/Generic.jpg" %}'}" 
                      alt="${escapeHtml(movie.title)}">
                 <div class="overlay"></div>
             </a>
@@ -68,53 +179,48 @@ function displayMovieDetails(movie) {
         <!--********* Slideshow *********-->
         <div class="page_item movie_page_item slideshow_item">
             <div class="banner">
-                <img src="{% static 'movieApp/images/movie_scenes/scene1.jpg' %}" alt="Scene 1">
-                <img src="{% static 'movieApp/images/movie_scenes/scene2.jpg' %}" alt="Scene 2">
-                <img src="{% static 'movieApp/images/movie_scenes/scene3.jpg' %}" alt="Scene 3">
+                <img src="{% static 'movieApp/images/Movies/Generic/SlideShow/Generic1.jpg' %}" alt="Scene 1">
+                <img src="{% static 'movieApp/images/Movies/Generic/SlideShow/Generic2.jpg' %}" alt="Scene 2">
+                <img src="{% static 'movieApp/images/Movies/Generic/SlideShow/Generic3.jpg' %}" alt="Scene 3">
             </div>
         </div>
 
-        <!--********* Info *********-->
-        <div class="page_item movie_page_item info_item">
-            <ul>
-                <h1>Year:</h1>
-                <p>${movie.year}</p>
-            </ul>
-            <ul>
-                <h1>Duration:</h1>
-                <p>${formatDuration(movie.duration)}</p>
-            </ul>
-            <ul>
-                <h1>Age advisory:</h1>
-                <p>${movie.matureContent ? '15+' : 'All ages'}</p>
-            </ul>
-            <ul>
-                <h1>Genre:</h1>
-                <p>${escapeHtml(movie.genre)}</p>
-            </ul>
-            <ul>
-                <h1>Country:</h1>
-                <h2>${escapeHtml(movie.country)}</h2>
-            </ul>
-            <ul>
-                <h1>Description:</h1>
-                <p>${escapeHtml(movie.description)}</p>
-            </ul>
-        </div>
+        <!--********* Summary *********-->
+	<div class="page_item movie_page_item info_item">
+		<ul>
+			<h1> Year:</h1>
+			<p>${movie.year}</p>
+			<h1> Duration:</h1>
+			<p>${formatDuration(movie.duration)}</p>
+			<h1> Age advisory:</h1>
+			<p>${movie.matureContent ? '15+' : 'All ages'}</p>
+			<h1> Rating:</h1>
+			<p>8.5</p>
+			<h1> Genre:</h1>
+			<p>${escapeHtml(movie.genre)}</p>
+            <h1> Country:</h1>
+			<p>${escapeHtml(movie.country)}</p>
 
-        <!--********* Cast Members *********-->
-        <div class="page_item movie_page_item member_item1">
-            <div class="member_container">
-                <!-- Cast members will be added here when available -->
-            </div>
-        </div>
-        <div class="page_item movie_page_item member_item2">
-            <div class="member_container">
-                <!-- More cast members will be added here when available -->
-            </div>
-        </div>
+		</ul>
+		<ul>
+            <h1> Director:</h1>
+			<h2 id="directorID">Director Name</h2>
+			</br>
+			<h1> Stars:</h1>
+			<h2 id="actorID"> <a> Actor Name</a> </h2>
+			</br>
+            <h1>Description:</h1>
+            <p class="desc" >${escapeHtml(movie.description)}</p>
+			
+		</ul>
+
+	</div>
     `;
 }
+
+
+
+
 
 function formatDuration(duration) {
     try {
