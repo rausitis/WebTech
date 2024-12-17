@@ -172,9 +172,23 @@ class ContentViewset(APIView):
         items = models.Content.objects.all()
 
         #pagination
+        
+        
+        #fix of security flaws
+        MAX_PAGE_SIZE = 25
+
         page = request.GET.get('page', 1)
-        page_size = request.GET.get('page_size', 9)
+        page_size = int(request.GET.get('page_size', 9))
+        if page_size > MAX_PAGE_SIZE:  
+            page_size = MAX_PAGE_SIZE
+        
+        
+        #rest of the django stuff
+        
+        
         paginator = Paginator(items, page_size)
+
+      
 
         try:
             paginated_items = paginator.page(page)
