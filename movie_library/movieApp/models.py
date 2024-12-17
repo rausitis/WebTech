@@ -29,15 +29,23 @@ class UserInfoManager(BaseUserManager):
 
 class UserInfo(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=255, unique=True, blank=False)
-    email = models.EmailField(unique=True, blank=False)
+    email = models.EmailField(
+        unique=True,
+        blank=False,
+        validators=[
+            RegexValidator(r'^[\w\.-]+@[\w\.-]+\.\w+$', message="Enter a valid email address.")
+        ]
+    )
     firstname = models.CharField(
         max_length=50,
+        blank=False,
         validators=[
             RegexValidator(r'^[A-Za-z]+$', message="First name must contain only letters.")
         ]
     )
     lastname = models.CharField(
         max_length=50,
+        blank=False,
         validators=[
             RegexValidator(r'^[A-Za-z]+$', message="Last name must contain only letters.")
         ]

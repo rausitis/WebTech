@@ -14,7 +14,7 @@
         <input type="text" id="lastName" class="entryField" required pattern="[A-Za-z]+" minlength="2">
 
         <label class="fieldLabel" for="email">Email:</label>
-        <input type="email" id="email" class="entryField" required>
+        <input type="email" id="email" class="entryField" pattern="^[\w\.-]+@[\w\.-]+\.\w+$" required>
         
         <label class="fieldLabel" for="phoneNumber">Phone Number:</label>
         <input type="tel" id="phoneNumber" class="entryField" placeholder="+1234567890" pattern="^\+[1-9]\d{1,14}$" required>
