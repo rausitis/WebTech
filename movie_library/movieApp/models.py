@@ -6,7 +6,8 @@ from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 # from TwoFAUserApp.models import TwoFAUser
 import random
-
+# Individual extension SG
+from django.core.validators import MinLengthValidator, MaxLengthValidator, EmailValidator
 
 class UserInfoManager(BaseUserManager):
     def create_user(self, email, username, password=None, **extra_fields):
@@ -26,15 +27,16 @@ class UserInfoManager(BaseUserManager):
 
 
 class UserInfo(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=255, unique=True)
-    email = models.EmailField(unique=True)
-    firstname = models.CharField(max_length=255)
-    lastname = models.CharField(max_length=255)
+    username = models.CharField(max_length=255, unique=True, validators=[MinLengthValidator(1), MaxLengthValidator(40)])
+    email = models.EmailField(unique=True, validators=[EmailValidator(), MinLengthValidator(1), MaxLengthValidator(60)])
+    firstname = models.CharField(max_length=255, validators=[MinLengthValidator(1), MaxLengthValidator(40)])
+    lastname = models.CharField(max_length=255, validators=[MinLengthValidator(1),MaxLengthValidator(40)])
     createdAt = models.DateTimeField(default=timezone.now)
     modifiedAt = models.DateTimeField(auto_now=True)
-    phoneNo = PhoneNumberField(_("Phone Number"), blank=True, null=True)
+    phoneNo = PhoneNumberField(_("Phone Number"), blank=True, null=True, validators=[MinLengthValidator(8), MaxLengthValidator(15)])
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+
 
     objects = UserInfoManager()
 
@@ -44,15 +46,13 @@ class UserInfo(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-
 class Content(models.Model):
-    nr = models.IntegerField() 
-    title = models.CharField(max_length=255)
-    description = models.TextField(max_length=5000)
+    title = models.CharField(max_length=255, validators=[MinLengthValidator(1)])
+    description = models.TextField(max_length=5000, validators=[MinLengthValidator(1)])
     matureContent = models.BooleanField()
-    type = models.CharField(max_length=255)
-    country = models.CharField(max_length=255)
-    genre = models.CharField(max_length=255)
+    type = models.CharField(max_length=255, validators=[MinLengthValidator(1)])
+    country = models.CharField(max_length=255, validators=[MinLengthValidator(1)])
+    genre = models.CharField(max_length=255, validators=[MinLengthValidator(1)])
     year = models.PositiveIntegerField()
     duration = models.DurationField()
     seasonsNo = models.PositiveIntegerField()
@@ -61,6 +61,7 @@ class Content(models.Model):
     createdBy = models.ForeignKey(UserInfo, on_delete=models.SET_NULL,
                                   null=True,
                                   blank=True, related_name='createdContent')
+
     modifiedBy = models.ForeignKey(UserInfo, on_delete=models.SET_NULL,
                                    null=True,
                                    blank=True, related_name='modifiedContent')
