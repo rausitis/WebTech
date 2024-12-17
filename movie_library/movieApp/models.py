@@ -46,6 +46,7 @@ class UserInfo(AbstractBaseUser, PermissionsMixin):
 
 
 class Content(models.Model):
+    nr = models.IntegerField() 
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=5000)
     matureContent = models.BooleanField()
@@ -69,10 +70,12 @@ class Content(models.Model):
 
 
 class CastMembers(models.Model):
+    nr = models.IntegerField()
+    contentNr = models.IntegerField()
     firstname = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255, null=True, blank=True)
     character = models.TextField(max_length=255)
-    contentId = models.ForeignKey(Content, on_delete=models.CASCADE)
+    contentId = models.IntegerField()
     createdAt = models.DateTimeField(default=timezone.now)
     modifiedAt = models.DateTimeField(auto_now=True)
     movieStar = models.BooleanField()
@@ -100,10 +103,12 @@ class FavoriteContent(models.Model):
 
 
 class MovieMakers(models.Model):
+    nr = models.IntegerField()
+    contentNr = models.IntegerField()
     firstname = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255, null=True, blank=True)
     position = models.CharField(max_length=255)
-    contentId = models.ForeignKey(Content, on_delete=models.CASCADE)
+    contentId = models.IntegerField()
     createdAt = models.DateTimeField(default=timezone.now)
     modifiedAt = models.DateTimeField(auto_now=True)
     createdBy = models.ForeignKey(UserInfo, on_delete=models.SET_NULL,

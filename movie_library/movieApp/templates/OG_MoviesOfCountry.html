@@ -21,7 +21,7 @@
 				<img src="{% static 'movieApp/images/AboutPageBanner/Schindlers-List-Typing.jpg' %}">
 				<img src="{% static 'movieApp/images/AboutPageBanner/Pans_labyrinth_2.jpg' %}">
 				<img src="{% static 'movieApp/images/AboutPageBanner/Italian_Claasic.jpg' %}">
-				<div class="text" style="margin-top:50px" id="textid">Movies by country</div>
+				<div class="text" style="margin-top:50px">Movies by country</div>
 			<!--
 			-->
 			</div>
@@ -29,11 +29,79 @@
 	</div>
 </div>
  
+ 
+
+ <!--***************** Page content *****************-->
+<div class="page_container cntry_page_container"> 
+	
+<!--********* Movies of a country *********-->
+
+<!--********* Movie 1 *********-->
+	<!--********* Photo *********-->
+	<div class="page_item cntry_page_item photo_item">
+		<a href="Movie.html">
+			<div class="photo_item_frame">
+				<img src="../images/Movies/Movie1/SlideShow/img2.jpg">
+				<div class="overlay">
+				</div>
+			</div>			
+		</a>
+	</div>
+	<!--********* Text *********-->
+	<div class="page_item cntry_page_item text_item" id="movieItem">
+		<a href="Movie.html">
+			<h1>Movie name</h1>
+		</a>
+		<ul>
+			<h2> Year:</h2>
+			<p>1990</p>
+			<h2> Duration:</h2>
+			<p>2h 00m</p>
+			<h2> Age advisory:</h2>
+			<p>10+</p>
+			<h2> Rating:</h2>
+			<p>8.5</p>
+			<h2> Genre:</h2>
+			<p>Drama</p>
+			
+		</ul>
+	</div>
 
 
-  <!--***************** Page content *****************-->
-<div class="page_container cntry_page_container"id="movieItem"> 
-	<div class="loading" >Loading movie details...</div>
+	
+<!--********* Movie 6 *********-->
+	<!--********* Photo *********-->
+	<div class="page_item cntry_page_item photo_item">
+		<a href="Movie.html">
+			<div class="photo_item_frame">
+				<img src="../images/Movies/Movie1/SlideShow/img7.jpg">
+				<div class="overlay">
+				</div>
+			</div>			
+		</a>
+	</div>
+	<!--********* Text *********-->
+	<div class="page_item cntry_page_item text_item">
+		<a href="Movie.html">
+			<h1>Movie name</h1>
+		</a>
+		<ul>
+			<h2> Year:</h2>
+			<p>1990</p>
+			<h2> Duration:</h2>
+			<p>2h 00m</p>
+			<h2> Age advisory:</h2>
+			<p>10+</p>
+			<h2> Rating:</h2>
+			<p>8.5</p>
+			<h2> Genre:</h2>
+			<p>Drama</p>
+			
+		</ul>
+	</div>
+	
+
+
 </div>
 <!--***************** Page content end *****************-->
 {% endblock %}
@@ -43,34 +111,12 @@
 {% block extra_js %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-		
-		document.getElementById("textid").innerHTML = 'random';
-		const myid = {{ cntry_id }};
-		
-		if (myid==1) {
-			document.getElementById("textid").innerHTML = "Slovakian TV series";
-			const cntryId = 'slovakia, czechoslovakia';
-			fetchMovies(cntryId,'movieItem');
-		} else if (myid==2) {
-			document.getElementById("textid").innerHTML = "Latvian TV series";
-			const cntryId = 'latvia';
-			fetchMovies(cntryId,'movieItem');
-		} else if (myid==3) {
-			document.getElementById("textid").innerHTML = "Portuguese TV series";
-			const cntryId = 'portugal';
-			fetchMovies(cntryId,'movieItem');
-		} else if (myid==4) {
-			document.getElementById("textid").innerHTML = "Romanian TV series";
-			const cntryId = 'romania';
-			fetchMovies(cntryId,'movieItem');
-		} else if (myid==5) {
-			document.getElementById("textid").innerHTML = "Polish TV series";
-			const cntryId = 'poland';
-			fetchMovies(cntryId,'movieItem');
-		} else {
-			fetchMovies('nope','movieItem');
-		//  block of code to be executed if the condition1 is false and condition2 is false
-		}
+        fetchMovies('portugal','movieItem');
+        fetchMovies('latvia','moviesGridLV');
+        fetchMovies('slovakia, czechoslovakia','moviesGridSK');
+        fetchMovies('romania','moviesGridRO');
+        fetchMovies('poland','moviesGridPL');
+        
     });
 
     function fetchMovies(cntry, gridID) {
@@ -78,11 +124,11 @@
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    const movies = data.data.filter(item => item.type.toLowerCase() === 'tv series' & item.country.toLowerCase() === cntry );
-                    //const filtered = movies.slice(0, 3);
-					displayMovies(movies, gridID);
+                    const movies = data.data.filter(item => item.type.toLowerCase() === 'movie' & item.country.toLowerCase() === cntry );
+                    const filtered = movies.slice(0, 3);
+					displayMovies(filtered, gridID);
                 } else {
-                    throw new Error('Failed to fetch TV series');
+                    throw new Error('Failed to fetch movies');
                 }
             })
             .catch(error => {
@@ -90,7 +136,7 @@
                 document.getElementById(gridID).innerHTML = `
                     <div class="error-message">
                         <h2>Oops!</h2>
-                        <p>We couldn't load the TV series. Please try again later.</p>
+                        <p>We couldn't load the movies. Please try again later.</p>
                     </div>
                 `;
             });
@@ -102,38 +148,28 @@
         if (movies.length === 0) {
             container.innerHTML = `
                 <div class="error-message">
-                    <h2>No TV series found</h2>
+                    <h2>No movies found</h2>
                     <p>Check back later for our latest additions!</p>
                 </div>
             `;
             return;
         }
 		container.innerHTML = movies.map(movie => `
-			<div class="page_item cntry_page_item photo_item">
-				<a onclick="window.location.href='/movie/${movie.id}'">
-					<div class="photo_item_frame">
-						<img src="{% static 'movieApp/images/Movies/Generic/Generic.jpg' %}">
-						<div class="overlay">
-						</div>
-					</div>			
-				</a>
-			</div>
-
-            <div class="page_item cntry_page_item text_item" onclick="window.location.href='/movie/${movie.id}'">
-                <h1>${(movie.title)}</h1>
-				<ul>
-				<h2> Year:</h2>
-				<p>${movie.year}</p>
-				<h2> Duration:</h2>
-				<p>${formatDuration(movie.duration)}</p>
-				<h2> Age advisory:</h2>
-				<p>${movie.matureContent ? '<span class="mature_content">15+</span>' : ''}</p>
-				<h2> Rating:</h2>
-				<p>8.5</p>
-				<h2> Genre:</h2>
-				<p>${escapeHtml(movie.genre)}</p>
-				</ul>
-			</div>
+            <a href="Movie.html" onclick="window.location.href='/movie/${movie.id}'">
+                <h1>${escapeHtml(movie.title)}</h1>
+			</a>
+			<ul>
+			<h2> Year:</h2>
+			<p>${movie.year}</p>
+			<h2> Duration:</h2>
+			<p>${formatDuration(movie.duration)}</p>
+			<h2> Age advisory:</h2>
+			<p>${movie.matureContent ? '<span class="mature_content">15+</span>' : ''}</p>
+			<h2> Rating:</h2>
+			<p>8.5</p>
+			<h2> Genre:</h2>
+			<p>${escapeHtml(movie.genre)}</p>
+			</ul>
         `).join('');
     }
 

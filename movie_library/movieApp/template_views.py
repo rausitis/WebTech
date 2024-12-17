@@ -25,6 +25,14 @@ def tv_shows(request):
     return render(request, 'TVShows.html')
 
 
+def tv_shows_by_country(request):
+    return render(request, 'TVShowsByCountry.html')
+
+
+def tv_shows_of_country(request, cntry_id):
+    return render(request, 'TVShowsOfCountry.html', {'cntry_id': cntry_id})
+
+
 def about(request):
     return render(request, 'About.html')
 
@@ -37,8 +45,8 @@ def movies_by_country(request):
     return render(request, 'MoviesByCountry.html')
 
 
-def country_movies(request):
-    return render(request, 'Country_movies.html')
+def movies_of_country(request, cntry_id):
+    return render(request, 'MoviesOfCountry.html', {'cntry_id': cntry_id})
 
 
 def register(request):

@@ -24,15 +24,11 @@ def parse_duration(duration_str):
 def clean_content(row):
     return {
         "nr": int(row['nr']) if row['nr'] else 0,
-        "title": row['title'],
-        "description": row['description'],
-        "matureContent": row['matureContent (15+)'] == '1',
-        "type": row['type'],
-        "country": row['country'],
-        "genre": row['genre'],
-        "year": int(row['year']) if row['year'] else 2000,
-        "duration": str(parse_duration(row['duration'])),
-        "seasonsNo": int(row['seasonsNo']) if row['seasonsNo'] else 0,
+        "contentNr": int(row['contentNr']) if row['contentNr'] else 0,
+        "firstname": row['firstname'],
+        "lastname": row['lastname'],
+        "position": row['position'],
+        "contentId": int(row['contentId']) if row['contentId'] else 0,
         "createdAt": parse_date(row['createdAt']),
         "modifiedAt": parse_date(row['modifiedAt']),
         "createdBy": 1,
@@ -40,9 +36,8 @@ def clean_content(row):
     }
 
 
-
-def populate_movies(limit=57):
-    with open('c:\Clone\main\WebTech\movie_library\content.csv', 'r', encoding='utf-8') as file:
+def populate_moviemakers(limit=25):
+    with open('c:\Clone\main\WebTech\movie_library\MovieMakers.csv', 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         count = 0
         
@@ -56,15 +51,15 @@ def populate_movies(limit=57):
                 
             data = clean_content(row)
             
-            response = requests.post(f"http://localhost:8000/api/content/", json=data)
+            response = requests.post(f"http://localhost:8000/api/moviemakers/", json=data)
             
             if response.status_code == 201:
-                print(f"Successfully added: {data['title']}")
+                print(f"Successfully added: {data['nr']}")
             else:
-                print(f"Failed to add {data['title']}: {response.json()}")
+                print(f"Failed to add {data['nr']}: {response.json()}")
                 
             count += 1
 
 if __name__ == "__main__":
-    print("Starting to populate movies...")
-    populate_movies() 
+    print("Starting to populate cast...")
+    populate_moviemakers() 

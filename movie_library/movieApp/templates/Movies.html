@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'movieApp/css/styles_movies_by_country.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="aboutpage_page_container">
 	<div class="page_item aboutpage_item">
@@ -20,94 +24,64 @@
 	</div>
 </div>
 <div class="page_container">
-    <div class="movies_container" id="moviesGrid">
+    <div class="movies_container" id="moviesGridPT">
+        <!-- Loading state -->
+        <div class="loading">Loading movies...</div>
+    </div>
+</div>
+<div class="page_container">
+    <div class="movies_container" id="moviesGridLV">
+        <!-- Loading state -->
+        <div class="loading">Loading movies...</div>
+    </div>
+</div>
+<div class="page_container">
+    <div class="movies_container" id="moviesGridSK">
+        <!-- Loading state -->
+        <div class="loading">Loading movies...</div>
+    </div>
+</div>
+<div class="page_container">
+    <div class="movies_container" id="moviesGridRO">
+        <!-- Loading state -->
+        <div class="loading">Loading movies...</div>
+    </div>
+</div>
+<div class="page_container">
+    <div class="movies_container" id="moviesGridPL">
         <!-- Loading state -->
         <div class="loading">Loading movies...</div>
     </div>
 </div>
 {% endblock %}
 
-{% block extra_css %}
-<style>
-    .movies_container {
-        padding: 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 20px;
-    }
 
-    .movie_card {
-        background: var(--card-bg, #fff);
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        padding: 15px;
-        transition: transform 0.2s;
-    }
-
-    .movie_card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    .movie_meta {
-        color: #666;
-        margin: 10px 0;
-        font-size: 0.9em;
-    }
-
-    .mature_content {
-        background: #d32f2f;
-        color: white;
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-size: 0.8em;
-        margin-left: 5px;
-    }
-
-    .description {
-        font-size: 0.9em;
-        line-height: 1.4;
-        color: var(--text-color, #333);
-    }
-
-    .loading {
-        text-align: center;
-        padding: 50px;
-        grid-column: 1 / -1;
-        color: var(--text-color, #666);
-    }
-
-    .error-message {
-        text-align: center;
-        padding: 50px;
-        grid-column: 1 / -1;
-        color: #d32f2f;
-    }
-</style>
-{% endblock %}
 
 {% block extra_js %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        fetchMovies();
+        fetchMovies('portugal','moviesGridPT');
+        fetchMovies('latvia','moviesGridLV');
+        fetchMovies('slovakia, czechoslovakia','moviesGridSK');
+        fetchMovies('romania','moviesGridRO');
+        fetchMovies('poland','moviesGridPL');
+        
     });
 
-    function fetchMovies() {
+    function fetchMovies(cntry, gridID) {
         fetch('/api/content/')
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    const movies = data.data.filter(item => item.type.toLowerCase() === 'movie');
-                    displayMovies(movies);
+                    const movies = data.data.filter(item => item.type.toLowerCase() === 'movie' & item.country.toLowerCase() === cntry);
+                    displayMovies(movies, gridID);
                 } else {
                     throw new Error('Failed to fetch movies');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                document.getElementById('moviesGrid').innerHTML = `
+                document.getElementById(gridID).innerHTML = `
                     <div class="error-message">
                         <h2>Oops!</h2>
                         <p>We couldn't load the movies. Please try again later.</p>
@@ -116,8 +90,8 @@
             });
     }
 
-    function displayMovies(movies) {
-        const container = document.getElementById('moviesGrid');
+    function displayMovies(movies, gridID) {
+        const container = document.getElementById(gridID);
         
         if (movies.length === 0) {
             container.innerHTML = `
