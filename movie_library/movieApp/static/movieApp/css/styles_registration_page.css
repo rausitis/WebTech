@@ -30,6 +30,11 @@
 
 }
 
+.formRegister .errorMsg
+{
+	color: red;
+	font-weight: bold;
+}
 
 
 .formRegister .entryField

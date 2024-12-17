@@ -4,6 +4,8 @@ from django.contrib.auth.models import PermissionsMixin
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
 # from TwoFAUserApp.models import TwoFAUser
 import random
 
@@ -26,13 +28,23 @@ class UserInfoManager(BaseUserManager):
 
 
 class UserInfo(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=255, unique=True)
-    email = models.EmailField(unique=True)
-    firstname = models.CharField(max_length=255)
-    lastname = models.CharField(max_length=255)
-    createdAt = models.DateTimeField(default=timezone.now)
-    modifiedAt = models.DateTimeField(auto_now=True)
-    phoneNo = PhoneNumberField(_("Phone Number"), blank=True, null=True)
+    username = models.CharField(max_length=255, unique=True, blank=False)
+    email = models.EmailField(unique=True, blank=False)
+    firstname = models.CharField(
+        max_length=50,
+        validators=[
+            RegexValidator(r'^[A-Za-z]+$', message="First name must contain only letters.")
+        ]
+    )
+    lastname = models.CharField(
+        max_length=50,
+        validators=[
+            RegexValidator(r'^[A-Za-z]+$', message="Last name must contain only letters.")
+        ]
+    )
+    createdAt = models.DateTimeField(default=timezone.now, blank=False)
+    modifiedAt = models.DateTimeField(auto_now=True, blank=False)
+    phoneNo = PhoneNumberField(_("Phone Number"), blank=False, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 

@@ -8,10 +8,10 @@
         <h1>Create an Account</h1>
         
         <label class="fieldLabel" for="firstName">First Name:</label>
-        <input type="text" id="firstName" class="entryField" required>
+        <input type="text" id="firstName" class="entryField" required pattern="[A-Za-z]+" minlength="2">
         
         <label class="fieldLabel" for="lastName">Last Name:</label>
-        <input type="text" id="lastName" class="entryField" required>
+        <input type="text" id="lastName" class="entryField" required pattern="[A-Za-z]+" minlength="2">
 
         <label class="fieldLabel" for="email">Email:</label>
         <input type="email" id="email" class="entryField" required>
@@ -20,7 +20,7 @@
         <input type="tel" id="phoneNumber" class="entryField" placeholder="+1234567890" pattern="^\+[1-9]\d{1,14}$" required>
         
         <label class="fieldLabel" for="password1">Password:</label>
-        <input type="password" id="password1" class="entryField" required>
+        <input type="password" id="password1" class="entryField" minlength="8" required>
         
         <label class="fieldLabel" for="password2">Confirm Password:</label>
         <input type="password" id="password2" class="entryField" required>
